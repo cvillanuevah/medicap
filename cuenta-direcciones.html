@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mis Direcciones | Soberana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css?v=20260505c">
+</head>
+<body>
+  <div class="announcement-bar"><div class="announcement-slider"><div class="announcement-item">OPCI&Oacute;N DE ENV&Iacute;O EXPRESS Seg&uacute;n comuna</div><div class="announcement-item">DESPACHO GRATIS por compras sobre $80.000 en la RM</div></div></div>
+  <header class="header"><div class="header-inner"><div class="header-left"><div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div><a href="index.html" class="logo"><span class="logo-text">Soberana</span></a><nav class="main-nav"><ul><li><a href="#">Shop</a><div class="dropdown"><div class="dropdown-title">Categor&iacute;as</div><ul><li><a href="coleccion.html?cat=collares">Collares</a></li><li><a href="coleccion.html?cat=aros">Aros</a></li><li><a href="coleccion.html?cat=pulseras">Pulseras</a></li><li><a href="coleccion.html?cat=anillos">Anillos</a></li><li><a href="coleccion.html?cat=tobilleras">Tobilleras</a></li><li><a href="coleccion.html?cat=all">Ver todo</a></li></ul></div></li><li><a href="coleccion.html?cat=packs">Packs y Conjuntos</a></li><li><a href="conocenos.html">Con&oacute;cenos</a></li></ul></nav></div><div class="header-icons"><a href="cuenta.html" class="auth-link" title="Mi Cuenta"><i class="fa-solid fa-user"></i></a><button id="searchBtn" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button><button id="cartBtn" title="Carrito"><i class="fa-solid fa-bag-shopping"></i><span class="cart-count">0</span></button></div></div></header>
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div><nav class="mobile-nav" id="mobileNav"><div class="mobile-nav-header"><span style="font-family:var(--font-heading);font-size:1.3rem;letter-spacing:2px;">Soberana</span><button class="close-mobile-nav" id="closeMobileNav">&times;</button></div><ul><li><a href="coleccion.html?cat=collares">Collares</a></li><li><a href="coleccion.html?cat=aros">Aros</a></li><li><a href="coleccion.html?cat=pulseras">Pulseras</a></li><li><a href="coleccion.html?cat=anillos">Anillos</a></li><li><a href="coleccion.html?cat=tobilleras">Tobilleras</a></li><li><a href="coleccion.html?cat=packs">Packs y Conjuntos</a></li></ul></nav>
+  <div class="search-overlay" id="searchOverlay"><button class="close-search" id="closeSearch">&times;</button><div class="search-overlay-inner"><input type="text" placeholder="Buscar..."></div></div>
+  <div class="cart-drawer-overlay" id="cartOverlay"></div><div class="cart-drawer" id="cartDrawer"><div class="cart-drawer-header"><h3>Carrito</h3><button class="close-cart" id="closeCart">&times;</button></div><div class="cart-drawer-body"><p>Tu carrito est&aacute; vac&iacute;o</p></div></div>
+
+  <div class="page-hero"><h1>Mi Cuenta</h1></div>
+
+  <div class="page-content">
+    <div class="account-layout" id="accountContent">
+      <div class="account-sidebar">
+        <div class="account-avatar" id="accountAvatar"></div>
+        <div class="account-greeting" id="accountGreeting"></div>
+        <nav class="account-nav">
+          <a href="cuenta.html" class="account-nav-item"><i class="fa-regular fa-user"></i> Mi Perfil</a>
+          <a href="cuenta-pedidos.html" class="account-nav-item"><i class="fa-solid fa-bag-shopping"></i> Mis Pedidos</a>
+          <a href="cuenta-deseos.html" class="account-nav-item"><i class="fa-regular fa-heart"></i> Lista de Deseos</a>
+          <a href="cuenta-direcciones.html" class="account-nav-item active"><i class="fa-solid fa-location-dot"></i> Mis Direcciones</a>
+          <a href="cuenta-config.html" class="account-nav-item"><i class="fa-solid fa-gear"></i> Configuraci&oacute;n</a>
+          <a href="#" id="logoutBtn" class="account-nav-item account-nav-item--logout"><i class="fa-solid fa-arrow-right-from-bracket"></i> Cerrar Sesi&oacute;n</a>
+        </nav>
+      </div>
+
+      <div class="account-main">
+        <h2>Mis Direcciones</h2>
+        <div id="addressContent"></div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer"><div class="footer-inner"><div class="footer-col"><h4>Informaci&oacute;n</h4><ul><li><a href="cambios.html">Cambios y devoluciones</a></li><li><a href="despachos.html">Pol&iacute;ticas de Despacho</a></li><li><a href="terminos.html">T&eacute;rminos y Condiciones</a></li></ul></div><div class="footer-col"><h4>Soberana</h4><ul><li><a href="conocenos.html">Con&oacute;cenos</a></li><li><a href="cuidados.html">Cuidados de tus Joyas</a></li><li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li></ul></div><div class="footer-col"><h4>Contacto</h4><p><i class="fa-regular fa-envelope"></i>&nbsp; joyas@soberana.cl<br><i class="fa-brands fa-whatsapp"></i>&nbsp; +569 48061416<br><i class="fa-brands fa-instagram"></i>&nbsp; @soberana_joyas</p><div class="social-links"><a href="#"><i class="fa-brands fa-instagram"></i></a><a href="#"><i class="fa-brands fa-facebook-f"></i></a></div></div><div class="footer-col"><h4>Newsletter</h4><div class="footer-newsletter"><p>Suscr&iacute;bete para recibir novedades.</p><form class="newsletter-form-footer" onsubmit="return false;"><input type="email" placeholder="Tu email"><button type="submit">Suscribir</button></form></div></div></div><div class="footer-bottom"><p>&copy; 2026 Soberana</p><div class="payment-methods"><i class="fa-brands fa-cc-visa" style="font-size:1.6rem;color:rgba(255,255,255,0.6);"></i><i class="fa-brands fa-cc-mastercard" style="font-size:1.6rem;color:rgba(255,255,255,0.6);"></i><i class="fa-brands fa-cc-amex" style="font-size:1.6rem;color:rgba(255,255,255,0.6);"></i><i class="fa-brands fa-cc-diners-club" style="font-size:1.6rem;color:rgba(255,255,255,0.6);"></i></div></div></footer>
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js?v=20260505c"></script>
+  <script src="js/addresses.js"></script>
+  <script src="js/main.js?v=20260505d"></script>
+  <script>
+  (function() {
+    var user = Auth.getCurrentUser();
+    if (!user) { window.location.href = 'login.html'; return; }
+
+    var initial = (user.firstName || 'U').charAt(0).toUpperCase();
+    document.getElementById('accountAvatar').textContent = initial;
+    document.getElementById('accountGreeting').innerHTML =
+      '<h3>Hola, ' + user.firstName + '</h3><p>' + user.email + '</p>';
+
+    document.getElementById('logoutBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      Auth.logout();
+    });
+
+    function renderAddresses() {
+      var addresses = Addresses.getAll();
+      var el = document.getElementById('addressContent');
+      var html = '';
+
+      if (addresses.length < 3) {
+        html += '<div id="addAddressBtn" style="margin-bottom:18px;"><button class="auth-btn" style="width:auto;padding:10px 20px;font-size:0.85rem;" onclick="document.getElementById(\'addressForm\').style.display=\'block\';this.parentElement.style.display=\'none\'"><i class="fas fa-plus"></i> Agregar Dirección</button></div>';
+        html += '<div id="addressForm" class="address-form" style="display:none;">';
+        html += '<div class="form-group"><label>Etiqueta</label><select id="addrLabel"><option value="Casa">Casa</option><option value="Trabajo">Trabajo</option><option value="Otro">Otro</option></select></div>';
+        html += '<div class="form-group"><label>Dirección</label><input type="text" id="addrAddress" placeholder="Calle y número"></div>';
+        html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">';
+        html += '<div class="form-group"><label>Ciudad</label><input type="text" id="addrCity" placeholder="Ciudad"></div>';
+        html += '<div class="form-group"><label>Región</label><input type="text" id="addrRegion" placeholder="Región"></div>';
+        html += '</div>';
+        html += '<div class="form-group"><label>Teléfono</label><input type="tel" id="addrPhone" placeholder="+569 12345678"></div>';
+        html += '<div style="display:flex;gap:8px;margin-top:8px;">';
+        html += '<button class="auth-btn" style="width:auto;padding:10px 20px;font-size:0.85rem;" onclick="saveAddress()">Guardar</button>';
+        html += '<button class="auth-btn" style="width:auto;padding:10px 20px;font-size:0.85rem;background:transparent;color:var(--color-text);border:1px solid #e8e5df;" onclick="document.getElementById(\'addressForm\').style.display=\'none\';document.getElementById(\'addAddressBtn\').style.display=\'block\'">Cancelar</button>';
+        html += '</div></div>';
+      }
+
+      if (addresses.length === 0) {
+        html += '<div class="acct-empty"><i class="fa-solid fa-location-dot"></i><p>No tienes direcciones guardadas.</p></div>';
+      } else {
+        html += '<div class="address-list">';
+        addresses.forEach(function(a) {
+          var isDefault = a.isDefault;
+          html += '<div class="address-card ' + (isDefault ? 'address-card--default' : '') + '">';
+          html += '<div class="address-card__label">' + a.label;
+          if (isDefault) html += ' <span class="address-card__default-badge">Principal</span>';
+          html += '</div>';
+          html += '<div class="address-card__text">' + a.address + '<br>' + a.city + ', ' + a.region;
+          if (a.phone) html += '<br>' + a.phone;
+          html += '</div>';
+          html += '<div class="address-card__actions">';
+          if (!isDefault) html += '<button onclick="makeDefault(\'' + a.id + '\')">Hacer principal</button>';
+          html += '<button class="btn-delete" onclick="deleteAddress(\'' + a.id + '\')">Eliminar</button>';
+          html += '</div></div>';
+        });
+        html += '</div>';
+      }
+
+      el.innerHTML = html;
+    }
+
+    window.saveAddress = function() {
+      var result = Addresses.add({
+        label: document.getElementById('addrLabel').value,
+        address: document.getElementById('addrAddress').value,
+        city: document.getElementById('addrCity').value,
+        region: document.getElementById('addrRegion').value,
+        phone: document.getElementById('addrPhone').value
+      });
+      if (!result.ok) { alert(result.error); return; }
+      renderAddresses();
+    };
+
+    window.deleteAddress = function(id) {
+      Addresses.remove(id);
+      renderAddresses();
+    };
+
+    window.makeDefault = function(id) {
+      Addresses.setDefault(id);
+      renderAddresses();
+    };
+
+    renderAddresses();
+  })();
+  </script>
+</body>
+</html>

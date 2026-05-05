@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Soberana | Joyas y Tendencias</title>
+  <meta name="description" content="Joyas para cada outfit. Envío gratis por compras sobre $80.000 en la RM.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css?v=20260505c">
+  <link rel="icon" type="image/png" href="https://soberana.cl/cdn/shop/files/Soberana_Logo_1.png?v=1689715711">
+</head>
+<body>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loadingScreen">
+    <div class="loader-text">Soberana</div>
+  </div>
+
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <div class="announcement-slider">
+      <div class="announcement-item">
+        OPCI&Oacute;N DE ENV&Iacute;O EXPRESS Seg&uacute;n comuna
+      </div>
+      <div class="announcement-item">
+        DESPACHO GRATIS por compras sobre $80.000 en la RM
+      </div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-left">
+        <!-- Mobile menu toggle -->
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+          <span class="logo-text">Soberana</span>
+        </a>
+
+        <!-- Main Navigation -->
+        <nav class="main-nav">
+          <ul>
+            <li>
+              <a href="#">Shop</a>
+              <div class="dropdown">
+                <div class="dropdown-title">Categor&iacute;as</div>
+                <ul>
+                  <li><a href="coleccion.html?cat=collares">Collares</a></li>
+                  <li><a href="coleccion.html?cat=aros">Aros</a></li>
+                  <li><a href="coleccion.html?cat=pulseras">Pulseras</a></li>
+                  <li><a href="coleccion.html?cat=anillos">Anillos</a></li>
+                  <li><a href="coleccion.html?cat=tobilleras">Tobilleras</a></li>
+                  <li><a href="coleccion.html?cat=all">Ver todo</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="coleccion.html?cat=packs">Packs y Conjuntos</a>
+            </li>
+            <li>
+              <a href="#">Regalos</a>
+              <div class="dropdown">
+                <div class="dropdown-title">Por precio</div>
+                <ul>
+                  <li><a href="coleccion.html?cat=all&max=20000">Hasta $20.000</a></li>
+                  <li><a href="coleccion.html?cat=all&min=20000&max=30000">$20.000 - $30.000</a></li>
+                  <li><a href="coleccion.html?cat=all&min=30000&max=50000">$30.000 - $50.000</a></li>
+                  <li><a href="coleccion.html?cat=all&min=50000">Sobre $50.000</a></li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <a href="conocenos.html">Con&oacute;cenos</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+
+      <!-- Header Icons -->
+      <div class="header-icons">
+        <a href="login.html" class="auth-link" title="Ingresar"><i class="fa-regular fa-user"></i></a>
+        <button id="searchBtn" title="Buscar"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <button id="cartBtn" title="Carrito">
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span class="cart-count">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation -->
+  <div class="mobile-nav-overlay" id="mobileNavOverlay"></div>
+  <nav class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-header">
+      <span class="logo-text" style="font-family: var(--font-heading); font-size: 1.3rem; letter-spacing: 2px;">Soberana</span>
+      <button class="close-mobile-nav" id="closeMobileNav">&times;</button>
+    </div>
+    <ul>
+      <li><a href="coleccion.html?cat=collares">Collares</a></li>
+      <li><a href="coleccion.html?cat=aros">Aros</a></li>
+      <li><a href="coleccion.html?cat=pulseras">Pulseras</a></li>
+      <li><a href="coleccion.html?cat=anillos">Anillos</a></li>
+      <li><a href="coleccion.html?cat=tobilleras">Tobilleras</a></li>
+      <li><a href="coleccion.html?cat=packs">Packs y Conjuntos</a></li>
+      <li><a href="conocenos.html">Con&oacute;cenos</a></li>
+    </ul>
+  </nav>
+
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="searchOverlay">
+    <button class="close-search" id="closeSearch">&times;</button>
+    <div class="search-overlay-inner">
+      <input type="text" placeholder="Buscar...">
+    </div>
+  </div>
+
+  <!-- Cart Drawer -->
+  <div class="cart-drawer-overlay" id="cartOverlay"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <h3>Carrito</h3>
+      <button class="close-cart" id="closeCart">&times;</button>
+    </div>
+    <div class="cart-drawer-body">
+      <p>Tu carrito est&aacute; vac&iacute;o</p>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-slider" id="heroSlider">
+      <!-- Slide 1 -->
+      <div class="hero-slide">
+        <img src="https://soberana.cl/cdn/shop/files/9B2357D7-738C-4BBB-A391-17DB94D86BD8.jpg?v=1752006933&width=2000" alt="Joyas Soberana">
+        <div class="hero-overlay">
+          <h1>Joyas para cada outfit</h1>
+          <a href="#best-sellers" class="btn-hero">Ver Productos</a>
+        </div>
+      </div>
+      <!-- Slide 2 -->
+      <div class="hero-slide">
+        <img src="https://soberana.cl/cdn/shop/files/Soberana_Banner-2_5464be49-092d-4596-bc1c-a9ab75395cd9.jpg?v=1689630182&width=2000" alt="Regala Estilo">
+        <div class="hero-overlay">
+          <h1>Regala estilo</h1>
+          <a href="#new-in" class="btn-hero">Ver Productos</a>
+        </div>
+      </div>
+    </div>
+    <div class="hero-dots">
+      <button class="dot active" data-slide="0"></button>
+      <button class="dot" data-slide="1"></button>
+    </div>
+  </section>
+
+  <!-- Best Sellers -->
+  <section class="section fade-in" id="best-sellers">
+    <h2 class="section-title">Best Sellers</h2>
+    <p class="section-subtitle">Nuestros favoritos</p>
+    <div class="product-grid">
+      <a href="producto.html?id=collar-letra-mini" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/0_1_a92bf78c-1c0d-42de-8bfc-f9d15f364817.jpg?v=1776997952&width=800" alt="Collar Letra Mini" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Letra Mini</h3><p class="price">$28.990</p></div>
+      </a>
+      <a href="producto.html?id=collar-drop" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/0_953ebb08-33b9-4636-b6ec-14d50ee7de02.jpg?v=1691610392&width=800" alt="Collar Drop" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Drop</h3><p class="price">$25.990</p></div>
+      </a>
+      <a href="producto.html?id=collar-sarah" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/0_7228da3b-d1b4-484b-96ae-d061226d57b4.jpg?v=1691609307&width=800" alt="Collar Sarah" loading="lazy">
+          <span class="product-badge sold-out">Agotado</span>
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Sarah</h3><p class="price">$29.500</p></div>
+      </a>
+      <a href="producto.html?id=choker-cleo-45-gold" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/0_6a8533b3-4992-4c6d-b984-e97dbc032fa3.jpg?width=800" alt="Choker Cleo 45 Gold" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Choker Cleo 45 Gold</h3><p class="price">$30.000</p></div>
+      </a>
+      <a href="producto.html?id=collar-punto-de-luz" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/image_bb555e2b-496d-4289-a9a3-b499fa049568.jpg?v=1691718548&width=800" alt="Collar Punto de Luz" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Punto de Luz</h3><p class="price">$32.000</p></div>
+      </a>
+      <a href="producto.html?id=collar-basic" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/0_40b731e2-91f1-42ba-a3fb-0741850ae9ac.jpg?v=1691611182&width=800" alt="Collar Basic" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Basic</h3><p class="price">$18.990</p></div>
+      </a>
+      <a href="producto.html?id=pulsera-bigmost-virgen" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/FullSizeRender_95b0da78-8afe-4035-952d-4909aff9646f.jpg?v=1730506165&width=800" alt="Pulsera Bigmost Virgen" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Pulsera Bigmost Virgen</h3><p class="price">$24.990</p></div>
+      </a>
+      <a href="producto.html?id=pulsera-bigmost-star" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/6C01B8B5-8770-4406-8595-D8180355EE26.jpg?v=1697136007&width=800" alt="Pulsera Bigmost Star" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Pulsera Bigmost Star</h3><p class="price">$24.500</p></div>
+      </a>
+    </div>
+    <a href="coleccion.html?cat=all" class="section-link">Ver todos los Best Sellers &rarr;</a>
+  </section>
+
+  <!-- New In -->
+  <section class="section fade-in" id="new-in">
+    <h2 class="section-title">New In</h2>
+    <p class="section-subtitle">Reci&eacute;n llegados</p>
+    <div class="product-grid">
+      <a href="producto.html?id=collar-estrella-nacar" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/FullSizeRender_750de997-748b-4022-9465-ae0e7a20ca46.jpg?width=800" alt="Collar Estrella Nacar" loading="lazy">
+          <span class="product-badge sold-out">Agotado</span>
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Estrella Nacar</h3><p class="price">$29.990</p></div>
+      </a>
+      <a href="producto.html?id=aros-cala-perlas" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/FullSizeRender_49b443f8-3412-4e6c-8564-1c29e3fe7861.jpg?width=800" alt="Aros Cala Perlas" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Aros Cala Perlas</h3><p class="price">$21.500</p></div>
+      </a>
+      <a href="producto.html?id=collar-marino" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/A99854CA-F0E9-4170-898A-6A27C43B9A6A.jpg?width=800" alt="Collar Marino" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Marino</h3><p class="price">$34.990</p></div>
+      </a>
+      <a href="producto.html?id=aros-bali" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/327DDBBD-855B-4C18-9570-81D71222843C.jpg?width=800" alt="Aros Bali" loading="lazy">
+          <span class="product-badge sold-out">Agotado</span>
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Aros Bali</h3><p class="price">$25.990</p></div>
+      </a>
+      <a href="producto.html?id=collar-arancia" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/640CE627-96FC-495B-9112-F35438578868.jpg?width=800" alt="Collar Arancia" loading="lazy">
+          <span class="product-badge sold-out">Agotado</span>
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Arancia</h3><p class="price">$34.990</p></div>
+      </a>
+      <a href="producto.html?id=collar-jade" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/FullSizeRender_2770a30a-34aa-4646-a0af-3125d5a5d0e2.jpg?width=800" alt="Collar Jade" loading="lazy">
+          <span class="product-badge sold-out">Agotado</span>
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Collar Jade</h3><p class="price">$32.990</p></div>
+      </a>
+      <a href="producto.html?id=aros-marqueza" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/79DB2716-C659-4C3B-97BB-4691CA980BE3.jpg?width=800" alt="Aros Marqueza" loading="lazy">
+          <span class="product-badge sold-out">Agotado</span>
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Aros Marqueza</h3><p class="price">$24.990</p></div>
+      </a>
+      <a href="producto.html?id=pulsera-let-it-bee" class="product-card">
+        <div class="product-image">
+          <img src="https://soberana.cl/cdn/shop/files/9B2357D7-738C-4BBB-A391-17DB94D86BD8.jpg?width=800" alt="Pulsera Let it Bee" loading="lazy">
+          <div class="quick-view">Ver Producto</div>
+        </div>
+        <div class="product-info"><h3>Pulsera Let it Bee</h3><p class="price">$29.500</p></div>
+      </a>
+    </div>
+    <a href="coleccion.html?cat=all" class="section-link">Ver toda la colecci&oacute;n &rarr;</a>
+  </section>
+
+  <!-- Categories -->
+  <section class="categories-section fade-in">
+    <h2 class="section-title" style="margin-bottom: 50px;">Compra por categor&iacute;a</h2>
+    <div class="categories-grid">
+      <a href="coleccion.html?cat=collares" class="category-card">
+        <img src="https://soberana.cl/cdn/shop/collections/Soberana_Colecciones-Collares.jpg?v=1589205623&width=800" alt="Collares" loading="lazy">
+        <div class="category-overlay"><h3>Collares</h3></div>
+      </a>
+      <a href="coleccion.html?cat=aros" class="category-card">
+        <img src="https://soberana.cl/cdn/shop/collections/Soberana_Colecciones-Aros.jpg?v=1589205585&width=800" alt="Aros" loading="lazy">
+        <div class="category-overlay"><h3>Aros</h3></div>
+      </a>
+      <a href="coleccion.html?cat=anillos" class="category-card">
+        <img src="https://soberana.cl/cdn/shop/collections/image_8cc0bb8c-9880-4c24-8496-9fe61838cecb.jpg?v=1689687708&width=800" alt="Anillos" loading="lazy">
+        <div class="category-overlay"><h3>Anillos</h3></div>
+      </a>
+      <a href="coleccion.html?cat=pulseras" class="category-card">
+        <img src="https://soberana.cl/cdn/shop/collections/Soberana_Colecciones-Pulseras_a8ad7e20-e108-4724-816e-4f3769ba4d2b.jpg?v=1718141735&width=800" alt="Pulseras" loading="lazy">
+        <div class="category-overlay"><h3>Pulseras</h3></div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Info Blocks -->
+  <section class="info-section fade-in">
+    <div class="info-grid">
+      <div class="info-block">
+        <svg class="info-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+        </svg>
+        <h3>Env&iacute;o Gratis</h3>
+        <p>Despacho gratis por compras sobre $80.000 en la Regi&oacute;n Metropolitana</p>
+      </div>
+      <div class="info-block">
+        <svg class="info-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+        <h3>Cambios y Devoluciones</h3>
+        <p>10 d&iacute;as para devoluciones y 30 d&iacute;as para cambios desde la recepci&oacute;n de tu compra</p>
+      </div>
+      <div class="info-block">
+        <svg class="info-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <h3>Hecho a Mano</h3>
+        <p>Joyas de larga duraci&oacute;n, hipoalerg&eacute;nicas y libres de n&iacute;quel</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter-section fade-in">
+    <h2>S&uacute;mate a Soberana</h2>
+    <p>Entérate primero de nuestros lanzamientos y promociones exclusivas</p>
+    <form class="newsletter-form" onsubmit="return false;">
+      <input type="email" placeholder="Tu email">
+      <button type="submit">Suscribir</button>
+    </form>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <!-- Col 1: Information -->
+      <div class="footer-col">
+        <h4>Informaci&oacute;n</h4>
+        <ul>
+          <li><a href="cambios.html">Cambios y devoluciones</a></li>
+          <li><a href="despachos.html">Pol&iacute;ticas de Despacho</a></li>
+          <li><a href="terminos.html">T&eacute;rminos y Condiciones</a></li>
+        </ul>
+      </div>
+      <!-- Col 2: About -->
+      <div class="footer-col">
+        <h4>Soberana</h4>
+        <ul>
+          <li><a href="conocenos.html">Con&oacute;cenos</a></li>
+          <li><a href="cuidados.html">Cuidados de tus Joyas</a></li>
+          <li><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+        </ul>
+      </div>
+      <!-- Col 3: Contact -->
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p>
+          <i class="fa-regular fa-envelope"></i>&nbsp; joyas@soberana.cl<br>
+          <i class="fa-brands fa-whatsapp"></i>&nbsp; +569 48061416<br>
+          <i class="fa-brands fa-instagram"></i>&nbsp; @soberana_joyas
+        </p>
+        <div class="social-links">
+          <a href="#" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="#" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        </div>
+      </div>
+      <!-- Col 4: Newsletter -->
+      <div class="footer-col">
+        <h4>Newsletter</h4>
+        <div class="footer-newsletter">
+          <p>Suscr&iacute;bete para recibir novedades y ofertas especiales.</p>
+          <form class="newsletter-form-footer" onsubmit="return false;">
+            <input type="email" placeholder="Tu email">
+            <button type="submit">Suscribir</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+      <p>&copy; 2026 Soberana</p>
+      <div class="payment-methods">
+        <i class="fa-brands fa-cc-visa" style="font-size:1.6rem; color:rgba(255,255,255,0.6);"></i>
+        <i class="fa-brands fa-cc-mastercard" style="font-size:1.6rem; color:rgba(255,255,255,0.6);"></i>
+        <i class="fa-brands fa-cc-amex" style="font-size:1.6rem; color:rgba(255,255,255,0.6);"></i>
+        <i class="fa-brands fa-cc-diners-club" style="font-size:1.6rem; color:rgba(255,255,255,0.6);"></i>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/products.js"></script>
+  <script src="js/product-manager.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js?v=20260505c"></script>
+  <script src="js/main.js?v=20260505d"></script>
+</body>
+</html>

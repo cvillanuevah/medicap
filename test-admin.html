@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Admin Link</title>
+  <style>
+    body { font-family: sans-serif; padding: 40px; max-width: 600px; margin: 0 auto; }
+    .result { padding: 12px; margin: 8px 0; border-radius: 6px; }
+    .ok { background: #ecfdf5; color: #065f46; }
+    .fail { background: #fef2f2; color: #991b1b; }
+    pre { background: #f5f5f5; padding: 12px; border-radius: 6px; font-size: 13px; overflow-x: auto; }
+    button { padding: 10px 20px; font-size: 14px; cursor: pointer; margin: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Diagnostico Admin Link</h1>
+  <div id="results"></div>
+  <hr>
+  <h3>Acciones</h3>
+  <button onclick="loginAdmin()">Login como Admin</button>
+  <button onclick="logoutUser()">Cerrar Sesion</button>
+  <button onclick="location.reload()">Recargar</button>
+  <button onclick="location.href='index.html'">Ir a Tienda</button>
+  <button onclick="location.href='cuenta.html'">Ir a Cuenta</button>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js?v=20260505c"></script>
+  <script>
+    var r = document.getElementById('results');
+    function log(msg, ok) {
+      r.innerHTML += '<div class="result ' + (ok ? 'ok' : 'fail') + '">' + msg + '</div>';
+    }
+
+    // Test 1: Auth module loaded
+    log('1. Auth module existe: ' + (typeof Auth !== 'undefined'), typeof Auth !== 'undefined');
+
+    // Test 2: Session
+    var session = Auth.getSession();
+    log('2. Session activa: ' + JSON.stringify(session), !!session);
+
+    // Test 3: Is admin
+    var isAdmin = Auth.isAdmin();
+    log('3. Es admin: ' + isAdmin, isAdmin);
+
+    // Test 4: localStorage
+    var raw = localStorage.getItem('soberana_session');
+    log('4. localStorage soberana_session: <pre>' + raw + '</pre>', !!raw);
+
+    // Test 5: Users
+    var users = Auth.getAllUsers();
+    var adminUser = users.find(function(u) { return u.role === 'admin'; });
+    log('5. Admin user en DB: ' + (adminUser ? adminUser.email : 'NO ENCONTRADO'), !!adminUser);
+
+    // Test 6: readyState
+    log('6. document.readyState: ' + document.readyState, true);
+
+    function loginAdmin() {
+      var result = Auth.login('admin@soberana.cl', 'admin123');
+      log('Login result: ' + JSON.stringify(result), result.ok);
+      if (result.ok) {
+        log('Session despues de login: ' + JSON.stringify(Auth.getSession()), true);
+        log('isAdmin despues de login: ' + Auth.isAdmin(), Auth.isAdmin());
+        setTimeout(function() { location.reload(); }, 500);
+      }
+    }
+
+    function logoutUser() {
+      localStorage.removeItem('soberana_session');
+      location.reload();
+    }
+  </script>
+</body>
+</html>

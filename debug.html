@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Diagnóstico Admin</title>
+  <style>
+    body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; }
+    .box { background: #f5f5f5; border: 1px solid #ddd; border-radius: 8px; padding: 16px; margin: 12px 0; }
+    .ok { border-left: 4px solid #22c55e; }
+    .fail { border-left: 4px solid #ef4444; }
+    .warn { border-left: 4px solid #f59e0b; }
+    button { padding: 10px 20px; margin: 6px; border: none; border-radius: 6px; cursor: pointer; font-size: 14px; }
+    .btn-login { background: #1a1a1a; color: #fff; }
+    .btn-clear { background: #ef4444; color: #fff; }
+    .btn-go { background: #22c55e; color: #fff; }
+    h1 { font-size: 1.4rem; }
+    pre { background: #eee; padding: 8px; border-radius: 4px; overflow-x: auto; font-size: 12px; }
+  </style>
+</head>
+<body>
+  <h1>Diagnóstico - Botón Admin</h1>
+  <div id="results"></div>
+  <hr>
+  <h3>Acciones</h3>
+  <button class="btn-clear" onclick="clearAndReload()">Limpiar localStorage y recargar</button>
+  <button class="btn-login" onclick="loginAsAdmin()">Iniciar sesión como Admin</button>
+  <button class="btn-go" onclick="window.location.href='cuenta.html'">Ir a Cuenta</button>
+  <button class="btn-go" onclick="window.location.href='index.html'">Ir a Inicio</button>
+
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js?v=20260505c"></script>
+  <script>
+    function diagnose() {
+      var el = document.getElementById('results');
+      var html = '';
+
+      // 1. Session check
+      var session = null;
+      try {
+        session = JSON.parse(localStorage.getItem('soberana_session'));
+      } catch(e) {}
+
+      if (!session) {
+        html += '<div class="box fail"><strong>Sesión:</strong> NO hay sesión activa. No estás logueado.</div>';
+      } else {
+        html += '<div class="box ' + (session.role === 'admin' ? 'ok' : 'warn') + '">';
+        html += '<strong>Sesión:</strong> Logueado como <strong>' + session.firstName + '</strong> (' + session.email + ')';
+        html += '<br>Rol: <strong>' + (session.role || 'SIN ROL') + '</strong>';
+        html += '<br><pre>' + JSON.stringify(session, null, 2) + '</pre></div>';
+      }
+
+      // 2. Users check
+      var users = [];
+      try {
+        users = JSON.parse(localStorage.getItem('soberana_users')) || [];
+      } catch(e) {}
+
+      var adminUser = users.find(function(u) { return u.role === 'admin'; });
+      html += '<div class="box ' + (adminUser ? 'ok' : 'fail') + '">';
+      html += '<strong>Usuarios:</strong> ' + users.length + ' usuarios en localStorage.';
+      if (adminUser) {
+        html += '<br>Admin encontrado: <strong>' + adminUser.email + '</strong>';
+      } else {
+        html += '<br>NO hay usuario admin.';
+      }
+      html += '</div>';
+
+      // 3. Admin button check
+      var adminBtn = document.getElementById('adminPanelBtn');
+      html += '<div class="box ' + (adminBtn ? 'ok' : 'fail') + '">';
+      html += '<strong>Botón #adminPanelBtn:</strong> ';
+      if (adminBtn) {
+        html += 'EXISTE en el DOM. Display actual: <strong>' + getComputedStyle(adminBtn).display + '</strong>';
+        html += '<br>Inline style: <code>' + (adminBtn.getAttribute('style') || 'ninguno') + '</code>';
+      } else {
+        html += 'NO existe en esta página (esta página no tiene header completo, es normal).';
+      }
+      html += '</div>';
+
+      // 4. Auth module check
+      html += '<div class="box ' + (typeof Auth !== 'undefined' ? 'ok' : 'fail') + '">';
+      html += '<strong>Módulo Auth:</strong> ' + (typeof Auth !== 'undefined' ? 'Cargado correctamente' : 'NO CARGADO');
+      if (typeof Auth !== 'undefined') {
+        html += '<br>Auth.isLoggedIn(): <strong>' + Auth.isLoggedIn() + '</strong>';
+        html += '<br>Auth.isAdmin(): <strong>' + Auth.isAdmin() + '</strong>';
+      }
+      html += '</div>';
+
+      // Summary
+      if (session && session.role === 'admin') {
+        html += '<div class="box ok"><strong>RESULTADO:</strong> Todo correcto. El botón Admin DEBERÍA mostrarse en las páginas de la tienda. Haz clic en "Ir a Cuenta" o "Ir a Inicio" para verificar.</div>';
+      } else if (session) {
+        html += '<div class="box warn"><strong>RESULTADO:</strong> Estás logueado como CLIENTE, no como admin. El botón admin solo aparece para administradores. Haz clic en "Iniciar sesión como Admin".</div>';
+      } else {
+        html += '<div class="box fail"><strong>RESULTADO:</strong> No estás logueado. Haz clic en "Iniciar sesión como Admin" para probar.</div>';
+      }
+
+      el.innerHTML = html;
+    }
+
+    function clearAndReload() {
+      localStorage.removeItem('soberana_session');
+      localStorage.removeItem('soberana_users');
+      location.reload();
+    }
+
+    function loginAsAdmin() {
+      // Clear first
+      localStorage.removeItem('soberana_session');
+      localStorage.removeItem('soberana_users');
+      // Re-seed
+      Auth.updateAuthUI();
+      // Login
+      var result = Auth.login('admin@soberana.cl', 'admin123');
+      if (result.ok) {
+        alert('Login exitoso como Admin. Ahora navega a cuenta.html o index.html para ver el botón.');
+        diagnose();
+      } else {
+        alert('Error: ' + result.error);
+      }
+    }
+
+    diagnose();
+  </script>
+</body>
+</html>

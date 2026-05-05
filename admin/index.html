@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin | Soberana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/admin.css?v=20260505">
+</head>
+<body class="admin-body">
+
+  <!-- SIDEBAR -->
+  <aside class="admin-sidebar" id="sidebar">
+    <div class="admin-sidebar__header">
+      <span class="admin-sidebar__logo">Soberana</span>
+    </div>
+    <nav class="admin-sidebar__nav">
+      <a href="#" class="admin-nav-item active" data-section="dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+      <a href="#" class="admin-nav-item" data-section="products"><i class="fas fa-gem"></i> Productos</a>
+      <a href="#" class="admin-nav-item" data-section="orders"><i class="fas fa-shopping-bag"></i> Pedidos</a>
+      <a href="#" class="admin-nav-item" data-section="customers"><i class="fas fa-users"></i> Clientes</a>
+      <a href="#" class="admin-nav-item" data-section="activity"><i class="fas fa-clock-rotate-left"></i> Actividad</a>
+      <a href="#" class="admin-nav-item" data-section="settings"><i class="fas fa-cog"></i> Configuraci&oacute;n</a>
+    </nav>
+    <div class="admin-sidebar__footer">
+      <a href="../index.html" class="admin-nav-item"><i class="fas fa-store"></i> Ir a Tienda</a>
+      <a href="#" class="admin-nav-item" id="adminLogout"><i class="fas fa-sign-out-alt"></i> Cerrar Sesi&oacute;n</a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <div class="admin-main">
+    <header class="admin-topbar">
+      <button class="admin-sidebar-toggle" id="sidebarToggle"><i class="fas fa-bars"></i></button>
+      <h2 id="sectionTitle">Dashboard</h2>
+      <div class="admin-topbar__right">
+        <span id="adminName">Admin</span>
+        <div class="admin-avatar"><i class="fas fa-user"></i></div>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- DASHBOARD -->
+      <section id="section-dashboard" class="admin-section active">
+        <div class="admin-stats" id="statsGrid"></div>
+
+        <div class="admin-grid-2">
+          <div class="admin-card">
+            <h3 class="admin-card__title"><i class="fas fa-chart-bar" style="color:var(--adm-gold);margin-right:6px;"></i> Ingresos del Mes</h3>
+            <div class="dash-revenue">
+              <div class="dash-revenue__amount" id="dashMonthRevenue">$0</div>
+              <div class="dash-revenue__compare" id="dashRevenueCompare"></div>
+            </div>
+            <div id="salesChart"></div>
+          </div>
+          <div class="admin-card">
+            <h3 class="admin-card__title"><i class="fas fa-shopping-bag" style="color:var(--adm-info);margin-right:6px;"></i> &Uacute;ltimos Pedidos</h3>
+            <div id="recentOrdersTable"></div>
+          </div>
+        </div>
+
+        <div class="admin-grid-2">
+          <div class="admin-card">
+            <h3 class="admin-card__title"><i class="fas fa-trophy" style="color:var(--adm-warning);margin-right:6px;"></i> Productos M&aacute;s Vendidos</h3>
+            <div id="topProductsList"></div>
+          </div>
+          <div class="admin-card">
+            <h3 class="admin-card__title"><i class="fas fa-triangle-exclamation" style="color:var(--adm-danger);margin-right:6px;"></i> Alertas de Stock</h3>
+            <div id="dashStockAlerts"></div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <h3 class="admin-card__title"><i class="fas fa-clock-rotate-left" style="color:var(--adm-text-light);margin-right:6px;"></i> Actividad Reciente</h3>
+          <div id="dashRecentActivity"></div>
+        </div>
+      </section>
+
+      <!-- PRODUCTS -->
+      <section id="section-products" class="admin-section">
+        <div class="admin-section__header">
+          <h3>Gesti&oacute;n de Productos</h3>
+          <button class="admin-btn admin-btn--primary" onclick="openAddProduct()"><i class="fas fa-plus"></i> Agregar Producto</button>
+        </div>
+        <div class="prod-stats" id="prodStats">
+          <div class="prod-stat-card">
+            <div class="prod-stat-card__icon prod-stat-card__icon--total"><i class="fas fa-gem"></i></div>
+            <div class="prod-stat-card__info"><span class="prod-stat-card__value" id="statTotal">0</span><span class="prod-stat-card__label">Total productos</span></div>
+          </div>
+          <div class="prod-stat-card">
+            <div class="prod-stat-card__icon prod-stat-card__icon--stock"><i class="fas fa-check-circle"></i></div>
+            <div class="prod-stat-card__info"><span class="prod-stat-card__value" id="statInStock">0</span><span class="prod-stat-card__label">En stock</span></div>
+          </div>
+          <div class="prod-stat-card">
+            <div class="prod-stat-card__icon prod-stat-card__icon--out"><i class="fas fa-exclamation-circle"></i></div>
+            <div class="prod-stat-card__info"><span class="prod-stat-card__value" id="statOutStock">0</span><span class="prod-stat-card__label">Agotados</span></div>
+          </div>
+          <div class="prod-stat-card">
+            <div class="prod-stat-card__icon prod-stat-card__icon--low"><i class="fas fa-triangle-exclamation"></i></div>
+            <div class="prod-stat-card__info"><span class="prod-stat-card__value" id="statLowStock">0</span><span class="prod-stat-card__label">Stock bajo</span></div>
+          </div>
+          <div class="prod-stat-card">
+            <div class="prod-stat-card__icon prod-stat-card__icon--sale"><i class="fas fa-tag"></i></div>
+            <div class="prod-stat-card__info"><span class="prod-stat-card__value" id="statOnSale">0</span><span class="prod-stat-card__label">En oferta</span></div>
+          </div>
+          <div class="prod-stat-card">
+            <div class="prod-stat-card__icon prod-stat-card__icon--value"><i class="fas fa-coins"></i></div>
+            <div class="prod-stat-card__info"><span class="prod-stat-card__value" id="statValue">$0</span><span class="prod-stat-card__label">Valor inventario</span></div>
+          </div>
+        </div>
+        <div class="prod-tabs" id="productTabs">
+          <button class="prod-tab active" data-filter="active" onclick="filterProductTab('active')"><i class="fas fa-gem"></i> Activos <span class="prod-tab__count" id="tabCountActive">0</span></button>
+          <button class="prod-tab" data-filter="archived" onclick="filterProductTab('archived')"><i class="fas fa-box-archive"></i> Archivados <span class="prod-tab__count" id="tabCountArchived">0</span></button>
+          <button class="prod-tab" data-filter="all" onclick="filterProductTab('all')"><i class="fas fa-list"></i> Todos <span class="prod-tab__count" id="tabCountAll">0</span></button>
+        </div>
+        <div class="admin-card">
+          <div class="prod-toolbar">
+            <input type="text" id="productSearch" placeholder="Buscar producto..." class="admin-input">
+            <select id="productCatFilter" class="admin-select" onchange="applyProductFilters()">
+              <option value="">Todas las categor&iacute;as</option>
+              <option value="collares">Collares</option>
+              <option value="aros">Aros</option>
+              <option value="pulseras">Pulseras</option>
+              <option value="anillos">Anillos</option>
+              <option value="tobilleras">Tobilleras</option>
+              <option value="packs">Packs</option>
+            </select>
+            <select id="productStockFilter" class="admin-select" onchange="applyProductFilters()">
+              <option value="">Todo stock</option>
+              <option value="available">Disponible</option>
+              <option value="sold-out">Agotado</option>
+            </select>
+            <select id="productVisFilter" class="admin-select" onchange="applyProductFilters()">
+              <option value="">Toda visibilidad</option>
+              <option value="published">Publicado</option>
+              <option value="draft">Borrador</option>
+            </select>
+            <select id="productOfferFilter" class="admin-select" onchange="applyProductFilters()">
+              <option value="">Todas las ofertas</option>
+              <option value="on-sale">Con descuento</option>
+              <option value="no-sale">Sin descuento</option>
+            </select>
+            <select id="productSortFilter" class="admin-select" onchange="applyProductFilters()">
+              <option value="">Ordenar por...</option>
+              <option value="name-asc">Nombre A-Z</option>
+              <option value="name-desc">Nombre Z-A</option>
+              <option value="price-asc">Precio menor a mayor</option>
+              <option value="price-desc">Precio mayor a menor</option>
+              <option value="cat-asc">Categor&iacute;a A-Z</option>
+              <option value="created-desc">M&aacute;s recientes</option>
+              <option value="created-asc">M&aacute;s antiguos</option>
+              <option value="updated-desc">&Uacute;ltima actualizaci&oacute;n</option>
+              <option value="stock-desc">Mayor stock</option>
+              <option value="stock-asc">Menor stock</option>
+            </select>
+            <span class="prod-toolbar__count" id="prodFilterCount"></span>
+            <button class="prod-toolbar__clear" id="clearFiltersBtn" onclick="clearProductFilters()" style="display:none;" title="Limpiar filtros"><i class="fas fa-filter-circle-xmark"></i></button>
+            <div class="prod-view-toggle">
+              <button class="prod-view-btn active" id="viewTableBtn" onclick="setProductView('table')" title="Vista tabla"><i class="fas fa-table-list"></i></button>
+              <button class="prod-view-btn" id="viewGridBtn" onclick="setProductView('grid')" title="Vista grilla"><i class="fas fa-grid-2"></i></button>
+            </div>
+          </div>
+          <div class="bulk-bar" id="bulkBar" style="display:none;">
+            <div class="bulk-bar__left">
+              <span class="bulk-bar__count" id="bulkCount">0 seleccionados</span>
+              <button class="bulk-bar__btn" onclick="clearSelection()"><i class="fas fa-xmark"></i> Deseleccionar</button>
+            </div>
+            <div class="bulk-bar__actions">
+              <button class="bulk-bar__btn" onclick="bulkPublish(true)"><i class="fas fa-eye"></i> Publicar</button>
+              <button class="bulk-bar__btn" onclick="bulkPublish(false)"><i class="fas fa-eye-slash"></i> Ocultar</button>
+              <button class="bulk-bar__btn" onclick="bulkArchive()"><i class="fas fa-box-archive"></i> Archivar</button>
+              <button class="bulk-bar__btn bulk-bar__btn--danger" onclick="bulkDelete()"><i class="fas fa-trash"></i> Eliminar</button>
+            </div>
+          </div>
+          <div class="admin-table-wrapper" id="prodTableWrapper">
+            <table class="admin-table" id="productsTable">
+              <thead><tr><th class="th-check"><input type="checkbox" id="prodSelectAll" onchange="toggleSelectAll(this.checked)"></th><th>Imagen</th><th class="th-sortable" onclick="sortProductsBy('name')">Nombre <i class="fas fa-sort sort-icon" id="sortIconName"></i></th><th class="th-sortable" onclick="sortProductsBy('category')">Categor&iacute;a <i class="fas fa-sort sort-icon" id="sortIconCategory"></i></th><th class="th-sortable" onclick="sortProductsBy('price')">Precio <i class="fas fa-sort sort-icon" id="sortIconPrice"></i></th><th>Estado</th><th class="th-sortable" onclick="sortProductsBy('stock')">Stock <i class="fas fa-sort sort-icon" id="sortIconStock"></i></th><th>Visibilidad</th><th class="th-sortable th-date" onclick="sortProductsBy('created')">Creado <i class="fas fa-sort sort-icon" id="sortIconCreated"></i></th><th class="th-sortable th-date" onclick="sortProductsBy('updated')">Actualizado <i class="fas fa-sort sort-icon" id="sortIconUpdated"></i></th><th>Acciones</th></tr></thead>
+              <tbody id="productsTableBody"></tbody>
+            </table>
+          </div>
+          <div class="prod-grid" id="prodGridWrapper" style="display:none;"></div>
+        </div>
+      </section>
+
+      <!-- ORDERS -->
+      <section id="section-orders" class="admin-section">
+        <div class="admin-section__header">
+          <h3>Gesti&oacute;n de Pedidos</h3>
+          <select id="orderStatusFilter" class="admin-select">
+            <option value="">Todos</option>
+            <option value="pending">Pendiente</option>
+            <option value="confirmed">Confirmado</option>
+            <option value="shipped">Enviado</option>
+            <option value="delivered">Entregado</option>
+            <option value="cancelled">Cancelado</option>
+          </select>
+        </div>
+        <div class="admin-card">
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead><tr><th>#</th><th>Cliente</th><th>Total</th><th>Estado</th><th>Fecha</th></tr></thead>
+              <tbody id="ordersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- CUSTOMERS -->
+      <section id="section-customers" class="admin-section">
+        <div class="admin-section__header">
+          <h3>Clientes Registrados</h3>
+        </div>
+        <div class="admin-card">
+          <div class="admin-table-controls">
+            <input type="text" id="customerSearch" placeholder="Buscar cliente..." class="admin-input">
+          </div>
+          <div class="admin-table-wrapper">
+            <table class="admin-table">
+              <thead><tr><th>Nombre</th><th>Email</th><th>Pedidos</th><th>Fecha Registro</th></tr></thead>
+              <tbody id="customersTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="section-settings" class="admin-section">
+        <div class="admin-section__header">
+          <h3>Configuraci&oacute;n de la Tienda</h3>
+          <button class="admin-btn admin-btn--primary" onclick="saveSettings()"><i class="fas fa-check"></i> Guardar Cambios</button>
+        </div>
+
+        <div class="settings-grid">
+          <!-- General -->
+          <div class="admin-card settings-card">
+            <h4 class="settings-card__title"><i class="fas fa-store"></i> Informaci&oacute;n General</h4>
+            <div class="admin-form-group">
+              <label for="settingName">Nombre de la Tienda</label>
+              <input type="text" id="settingName" class="admin-input" value="Soberana" placeholder="Nombre de tu tienda">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingSlogan">Eslogan</label>
+              <input type="text" id="settingSlogan" class="admin-input" placeholder="Ej: Joyer&iacute;a fina hecha a mano">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingDesc">Descripci&oacute;n</label>
+              <textarea id="settingDesc" class="admin-input" rows="3" style="resize:vertical;" placeholder="Breve descripci&oacute;n de tu tienda para SEO y redes sociales..."></textarea>
+            </div>
+          </div>
+
+          <!-- Contacto -->
+          <div class="admin-card settings-card">
+            <h4 class="settings-card__title"><i class="fas fa-address-book"></i> Contacto</h4>
+            <div class="admin-form-group">
+              <label for="settingEmail">Email de Contacto</label>
+              <input type="email" id="settingEmail" class="admin-input" value="joyas@soberana.cl" placeholder="correo@tienda.cl">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingPhone">Tel&eacute;fono / WhatsApp</label>
+              <input type="text" id="settingPhone" class="admin-input" value="+569 48061416" placeholder="+56 9 XXXX XXXX">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingAddress">Direcci&oacute;n</label>
+              <input type="text" id="settingAddress" class="admin-input" value="Santiago, Chile" placeholder="Ciudad, Pa&iacute;s">
+            </div>
+          </div>
+
+          <!-- Redes Sociales -->
+          <div class="admin-card settings-card">
+            <h4 class="settings-card__title"><i class="fas fa-share-nodes"></i> Redes Sociales</h4>
+            <div class="admin-form-group">
+              <label for="settingInstagram"><i class="fab fa-instagram" style="color:#e1306c;"></i> Instagram</label>
+              <input type="text" id="settingInstagram" class="admin-input" value="@soberana_joyas" placeholder="@usuario">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingFacebook"><i class="fab fa-facebook" style="color:#1877f2;"></i> Facebook</label>
+              <input type="text" id="settingFacebook" class="admin-input" value="facebook.com/soberanajoyas" placeholder="facebook.com/tu-pagina">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingTiktok"><i class="fab fa-tiktok" style="color:#010101;"></i> TikTok</label>
+              <input type="text" id="settingTiktok" class="admin-input" placeholder="@usuario">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingWhatsapp"><i class="fab fa-whatsapp" style="color:#25d366;"></i> Link de WhatsApp</label>
+              <input type="text" id="settingWhatsapp" class="admin-input" placeholder="https://wa.me/56948061416">
+            </div>
+          </div>
+
+          <!-- Env&iacute;os -->
+          <div class="admin-card settings-card">
+            <h4 class="settings-card__title"><i class="fas fa-truck"></i> Env&iacute;os</h4>
+            <div class="admin-form-row">
+              <div class="admin-form-group">
+                <label for="settingShipCost">Costo de env&iacute;o</label>
+                <input type="number" id="settingShipCost" class="admin-input" min="0" value="3990" placeholder="3990">
+              </div>
+              <div class="admin-form-group">
+                <label for="settingFreeShipMin">Env&iacute;o gratis desde</label>
+                <input type="number" id="settingFreeShipMin" class="admin-input" min="0" value="80000" placeholder="80000">
+              </div>
+            </div>
+            <div class="admin-form-group">
+              <label for="settingShipTime">Tiempo estimado de entrega</label>
+              <input type="text" id="settingShipTime" class="admin-input" value="3-5 d&iacute;as h&aacute;biles" placeholder="Ej: 3-5 d&iacute;as h&aacute;biles">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingShipNote">Nota de env&iacute;o</label>
+              <input type="text" id="settingShipNote" class="admin-input" placeholder="Ej: Despacho solo a Regi&oacute;n Metropolitana">
+            </div>
+          </div>
+
+          <!-- Pagos -->
+          <div class="admin-card settings-card">
+            <h4 class="settings-card__title"><i class="fas fa-credit-card"></i> Pagos</h4>
+            <div class="admin-form-group">
+              <label>M&eacute;todos de pago aceptados</label>
+              <div class="settings-checks">
+                <label class="settings-check"><input type="checkbox" id="payTransfer" checked> Transferencia bancaria</label>
+                <label class="settings-check"><input type="checkbox" id="payWebpay"> Webpay / Tarjeta</label>
+                <label class="settings-check"><input type="checkbox" id="payMercadoPago"> MercadoPago</label>
+                <label class="settings-check"><input type="checkbox" id="payPaypal"> PayPal</label>
+              </div>
+            </div>
+            <div class="admin-form-group">
+              <label for="settingCurrency">Moneda</label>
+              <select id="settingCurrency" class="admin-input">
+                <option value="CLP" selected>Peso Chileno (CLP)</option>
+                <option value="USD">D&oacute;lar (USD)</option>
+                <option value="EUR">Euro (EUR)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Apariencia -->
+          <div class="admin-card settings-card">
+            <h4 class="settings-card__title"><i class="fas fa-palette"></i> Apariencia</h4>
+            <div class="admin-form-group">
+              <label for="settingColor">Color principal</label>
+              <div class="settings-color-row">
+                <input type="color" id="settingColor" class="settings-color-input" value="#c9a84c">
+                <input type="text" id="settingColorText" class="admin-input" value="#c9a84c" style="flex:1;" oninput="document.getElementById('settingColor').value=this.value" maxlength="7">
+              </div>
+            </div>
+            <div class="admin-form-group">
+              <label for="settingLogo">URL del Logo</label>
+              <input type="text" id="settingLogo" class="admin-input" placeholder="https://tu-dominio.com/logo.png">
+            </div>
+            <div class="admin-form-group">
+              <label for="settingFavicon">URL del Favicon</label>
+              <input type="text" id="settingFavicon" class="admin-input" placeholder="https://tu-dominio.com/favicon.ico">
+            </div>
+          </div>
+        </div>
+
+        <div class="settings-footer">
+          <button class="admin-btn admin-btn--primary" onclick="saveSettings()"><i class="fas fa-check"></i> Guardar Cambios</button>
+          <button class="admin-btn admin-btn--outline" onclick="resetSettings()"><i class="fas fa-undo"></i> Restaurar Valores por Defecto</button>
+        </div>
+      </section>
+
+      <!-- ACTIVITY LOG -->
+      <section id="section-activity" class="admin-section">
+        <div class="admin-section__header">
+          <h3>Registro de Actividad</h3>
+          <div style="display:flex;gap:8px;">
+            <select id="activityFilterType" class="admin-input" style="width:auto;" onchange="loadActivityLog()">
+              <option value="all">Todas las acciones</option>
+              <option value="product">Productos</option>
+              <option value="order">Pedidos</option>
+              <option value="settings">Configuraci&oacute;n</option>
+              <option value="auth">Sesi&oacute;n</option>
+            </select>
+            <button class="admin-btn admin-btn--outline" onclick="clearActivityLog()" title="Limpiar registro"><i class="fas fa-trash"></i> Limpiar</button>
+          </div>
+        </div>
+        <div class="admin-card">
+          <div id="activityLogList"></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ORDER DETAIL MODAL -->
+  <div class="admin-modal-overlay" id="orderModalOverlay">
+    <div class="admin-modal">
+      <div class="admin-modal__header">
+        <h3 id="orderModalTitle">Detalle del Pedido</h3>
+        <button class="admin-modal__close" onclick="closeOrderModal()"><i class="fas fa-xmark"></i></button>
+      </div>
+      <div class="admin-modal__body" id="orderModalBody"></div>
+    </div>
+  </div>
+
+  <!-- CUSTOMER DETAIL MODAL -->
+  <div class="admin-modal-overlay" id="customerModalOverlay">
+    <div class="admin-modal">
+      <div class="admin-modal__header">
+        <h3 id="customerModalTitle">Detalle del Cliente</h3>
+        <button class="admin-modal__close" onclick="closeCustomerModal()"><i class="fas fa-xmark"></i></button>
+      </div>
+      <div class="admin-modal__body" id="customerModalBody"></div>
+    </div>
+  </div>
+
+  <!-- PRODUCT EDIT/ADD MODAL -->
+  <div class="admin-modal-overlay" id="productModalOverlay">
+    <div class="admin-modal admin-modal--product">
+      <div class="admin-modal__header">
+        <h3 id="productModalTitle">Editar Producto</h3>
+        <div class="prod-header-status">
+          <label class="toggle-switch" title="Publicar / Ocultar producto en la tienda">
+            <input type="checkbox" class="toggle-switch__input" id="prodPublished" checked>
+            <span class="toggle-switch__slider"></span>
+            <span class="toggle-switch__label" id="prodPublishedLabel">Publicado</span>
+          </label>
+        </div>
+        <button class="admin-modal__close" onclick="closeProductModal()"><i class="fas fa-xmark"></i></button>
+      </div>
+      <div class="prod-editor-body">
+        <!-- LEFT: Images + Preview -->
+        <div class="prod-editor-left">
+          <div class="prod-section">
+            <div class="prod-section__header" onclick="toggleProdSection(this)">
+              <h4><i class="fas fa-images"></i> Im&aacute;genes</h4>
+              <i class="fas fa-chevron-down prod-section__toggle"></i>
+            </div>
+            <div class="prod-section__body">
+              <div class="img-gallery" id="prodImageGallery"></div>
+              <div class="img-add-tabs">
+                <button type="button" class="img-tab active" onclick="switchImageTab('url')"><i class="fas fa-link"></i> URL</button>
+                <button type="button" class="img-tab" onclick="switchImageTab('file')"><i class="fas fa-computer"></i> Archivo</button>
+              </div>
+              <div class="img-add-row" id="imgTabUrl">
+                <input type="url" id="prodImageInput" class="admin-input" placeholder="Pegar URL de imagen...">
+                <button type="button" class="admin-btn admin-btn--outline admin-btn--sm" onclick="addProductImage()"><i class="fas fa-plus"></i></button>
+              </div>
+              <div class="img-add-row" id="imgTabFile" style="display:none;">
+                <label class="img-file-label">
+                  <i class="fas fa-upload"></i> Seleccionar
+                  <input type="file" id="prodImageFile" accept="image/*" multiple style="display:none;" onchange="addProductImagesFromFiles(this)">
+                </label>
+                <span class="img-file-hint">JPG, PNG, WebP</span>
+              </div>
+            </div>
+          </div>
+          <div class="prod-preview">
+            <div class="prod-preview__title"><i class="fas fa-eye"></i> Vista previa en tienda</div>
+            <div class="prod-preview__card" id="prodPreviewCard">
+              <div class="prod-preview__img-wrap" id="prodPreviewImgWrap">
+                <div class="prod-preview__empty"><div class="prod-preview__empty-text"><i class="fas fa-image"></i>Sin imagen</div></div>
+              </div>
+              <div class="prod-preview__info">
+                <div class="prod-preview__name" id="prodPreviewName">Nombre del producto</div>
+                <div class="prod-preview__price" id="prodPreviewPrice">$0</div>
+              </div>
+            </div>
+            <a href="#" id="prodPreviewLink" class="prod-preview__link" target="_blank" style="display:none;">
+              <i class="fas fa-external-link-alt"></i> Ver como cliente en la tienda
+            </a>
+            <div class="prod-preview__hint" id="prodPreviewHint" style="display:none;"></div>
+          </div>
+        </div>
+        <!-- RIGHT: Form -->
+        <div class="prod-editor-right">
+          <form id="productForm" onsubmit="return false;">
+            <input type="hidden" id="prodEditId">
+            <div class="prod-section">
+              <div class="prod-section__header" onclick="toggleProdSection(this)">
+                <h4><i class="fas fa-info-circle"></i> Informaci&oacute;n B&aacute;sica</h4>
+                <i class="fas fa-chevron-down prod-section__toggle"></i>
+              </div>
+              <div class="prod-section__body">
+                <div class="admin-form-group">
+                  <label>Nombre del Producto</label>
+                  <input type="text" id="prodEditName" class="admin-input" required placeholder="Ej: Collar Punto de Luz">
+                </div>
+                <div class="admin-form-row">
+                  <div class="admin-form-group" style="flex:1;">
+                    <label>Descripci&oacute;n</label>
+                    <textarea id="prodEditDesc" class="admin-input" rows="3" style="resize:vertical;" placeholder="Describe el producto..."></textarea>
+                  </div>
+                </div>
+                <div class="admin-form-row">
+                  <div class="admin-form-group">
+                    <label>SKU</label>
+                    <input type="text" id="prodEditSku" class="admin-input" placeholder="Ej: SOB-COL-001">
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Peso (gramos)</label>
+                    <input type="number" id="prodEditWeight" class="admin-input" min="0" step="0.1" placeholder="Ej: 5.2">
+                  </div>
+                </div>
+                <div class="admin-form-group">
+                  <label>Notas internas <span style="font-weight:400;color:var(--adm-text-light);font-size:0.75rem;">(solo visible para administradores)</span></label>
+                  <textarea id="prodEditNotes" class="admin-input prod-notes-input" rows="2" style="resize:vertical;" placeholder="Notas del admin, proveedor, observaciones..."></textarea>
+                </div>
+              </div>
+            </div>
+            <div class="prod-section">
+              <div class="prod-section__header" onclick="toggleProdSection(this)">
+                <h4><i class="fas fa-tag"></i> Precios</h4>
+                <i class="fas fa-chevron-down prod-section__toggle"></i>
+              </div>
+              <div class="prod-section__body">
+                <div class="admin-form-group">
+                  <label>Precio Normal</label>
+                  <input type="number" id="prodEditPrice" class="admin-input" min="0" required placeholder="29990">
+                </div>
+                <div class="admin-form-row">
+                  <div class="admin-form-group">
+                    <label>Precio Oferta</label>
+                    <input type="number" id="prodEditSalePrice" class="admin-input" min="0" placeholder="Dejar vac&iacute;o si no hay">
+                  </div>
+                  <div class="admin-form-group">
+                    <label>% Descuento</label>
+                    <div class="input-with-suffix">
+                      <input type="number" id="prodEditSalePct" class="admin-input" min="1" max="99" placeholder="Ej: 20">
+                      <span class="input-suffix">%</span>
+                    </div>
+                  </div>
+                </div>
+                <div id="prodEditSaleInfo" class="prod-sale-info" style="display:none;">
+                  <i class="fas fa-tag"></i>
+                  <span id="prodEditDiscount"></span>
+                </div>
+              </div>
+            </div>
+            <div class="prod-section">
+              <div class="prod-section__header" onclick="toggleProdSection(this)">
+                <h4><i class="fas fa-layer-group"></i> Clasificaci&oacute;n</h4>
+                <i class="fas fa-chevron-down prod-section__toggle"></i>
+              </div>
+              <div class="prod-section__body">
+                <div class="admin-form-row">
+                  <div class="admin-form-group">
+                    <label>Categor&iacute;a</label>
+                    <select id="prodEditCategory" class="admin-input">
+                      <option value="collares">Collares</option>
+                      <option value="aros">Aros</option>
+                      <option value="pulseras">Pulseras</option>
+                      <option value="anillos">Anillos</option>
+                      <option value="tobilleras">Tobilleras</option>
+                      <option value="packs">Packs</option>
+                    </select>
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Estado stock</label>
+                    <select id="prodEditStatus" class="admin-input">
+                      <option value="in-stock">Disponible</option>
+                      <option value="agotado">Agotado</option>
+                    </select>
+                  </div>
+                </div>
+                <div class="admin-form-row">
+                  <div class="admin-form-group">
+                    <label>Cantidad en stock</label>
+                    <input type="number" id="prodEditStock" class="admin-input" min="0" placeholder="Ej: 25">
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Stock m&iacute;nimo (alerta)</label>
+                    <input type="number" id="prodEditStockMin" class="admin-input" min="0" placeholder="Ej: 3">
+                  </div>
+                </div>
+                <div class="admin-form-group">
+                  <label>Materiales</label>
+                  <div class="prod-materials">
+                    <label class="prod-material-check"><input type="checkbox" id="matGold" value="Gold" checked> Oro 18K</label>
+                    <label class="prod-material-check"><input type="checkbox" id="matSilver" value="Silver"> Plata</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="prod-section collapsed">
+              <div class="prod-section__header" onclick="toggleProdSection(this)">
+                <h4><i class="fas fa-calendar-clock"></i> Publicaci&oacute;n Programada</h4>
+                <i class="fas fa-chevron-down prod-section__toggle"></i>
+              </div>
+              <div class="prod-section__body">
+                <div class="sched-info" id="schedInfo" style="display:none;">
+                  <div class="sched-info__badge" id="schedBadge"></div>
+                </div>
+                <div class="admin-form-row">
+                  <div class="admin-form-group">
+                    <label>Fecha de publicaci&oacute;n</label>
+                    <input type="date" id="prodSchedDate" class="admin-input" onchange="updateSchedPreview()">
+                  </div>
+                  <div class="admin-form-group">
+                    <label>Hora</label>
+                    <input type="time" id="prodSchedTime" class="admin-input" onchange="updateSchedPreview()">
+                  </div>
+                </div>
+                <div class="sched-preview" id="schedPreview" style="display:none;"></div>
+                <div class="sched-actions">
+                  <button type="button" class="admin-btn admin-btn--outline admin-btn--sm" onclick="clearSchedule()"><i class="fas fa-xmark"></i> Quitar programaci&oacute;n</button>
+                </div>
+              </div>
+            </div>
+            <div class="prod-section collapsed" id="prodHistorySection" style="display:none;">
+              <div class="prod-section__header" onclick="toggleProdSection(this)">
+                <h4><i class="fas fa-clock-rotate-left"></i> Historial <span class="prod-history__count" id="prodHistoryCount"></span></h4>
+                <i class="fas fa-chevron-down prod-section__toggle"></i>
+              </div>
+              <div class="prod-section__body">
+                <div class="prod-dates" id="prodDates"></div>
+                <div class="prod-history" id="prodHistoryList"></div>
+              </div>
+            </div>
+            <div class="admin-form-actions">
+              <button type="button" class="admin-btn admin-btn--outline" onclick="closeProductModal()">Cancelar</button>
+              <span id="prodEditResetWrap" style="display:none;">
+                <button type="button" class="admin-btn admin-btn--outline" style="color:var(--adm-warning);" onclick="resetProduct()"><i class="fas fa-undo"></i> Restaurar</button>
+              </span>
+              <button type="button" class="admin-btn admin-btn--primary" onclick="saveProduct()"><i class="fas fa-check"></i> Guardar Producto</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ARCHIVE CONFIRM MODAL -->
+  <div class="admin-modal-overlay" id="archiveProductOverlay">
+    <div class="admin-modal" style="max-width:420px;">
+      <div class="admin-modal__header">
+        <h3 id="archiveModalTitle">Archivar Producto</h3>
+        <button class="admin-modal__close" onclick="document.getElementById('archiveProductOverlay').style.display='none'"><i class="fas fa-xmark"></i></button>
+      </div>
+      <div class="admin-modal__body" style="text-align:center;">
+        <div class="archive-confirm-icon"><i class="fas fa-box-archive"></i></div>
+        <p id="archiveModalText" style="margin-bottom:18px;">Este producto ser&aacute; archivado y ya no ser&aacute; visible en la tienda. Podr&aacute;s restaurarlo en cualquier momento.</p>
+        <div class="admin-form-actions" style="justify-content:center;">
+          <button class="admin-btn admin-btn--outline" onclick="document.getElementById('archiveProductOverlay').style.display='none'">Cancelar</button>
+          <button class="admin-btn admin-btn--primary" id="confirmArchiveBtn"><i class="fas fa-box-archive"></i> Archivar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DELETE CONFIRM MODAL -->
+  <div class="admin-modal-overlay" id="deleteProductOverlay">
+    <div class="admin-modal" style="max-width:400px;">
+      <div class="admin-modal__header">
+        <h3>Eliminar Producto</h3>
+        <button class="admin-modal__close" onclick="document.getElementById('deleteProductOverlay').style.display='none'"><i class="fas fa-xmark"></i></button>
+      </div>
+      <div class="admin-modal__body" style="text-align:center;">
+        <p style="margin-bottom:18px;">¿Est&aacute;s seguro de eliminar este producto? Esta acci&oacute;n no se puede deshacer.</p>
+        <div class="admin-form-actions" style="justify-content:center;">
+          <button class="admin-btn admin-btn--outline" onclick="document.getElementById('deleteProductOverlay').style.display='none'">Cancelar</button>
+          <button class="admin-btn admin-btn--danger" id="confirmDeleteBtn">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE LIGHTBOX -->
+  <div class="img-lightbox" id="imgLightbox" onclick="closeLightbox()">
+    <button class="img-lightbox__close" onclick="closeLightbox()">&times;</button>
+    <button class="img-lightbox__prev" onclick="event.stopPropagation();lightboxPrev()"><i class="fas fa-chevron-left"></i></button>
+    <img id="imgLightboxImg" src="" alt="">
+    <button class="img-lightbox__next" onclick="event.stopPropagation();lightboxNext()"><i class="fas fa-chevron-right"></i></button>
+    <div class="img-lightbox__bottom">
+      <div class="img-lightbox__counter" id="imgLightboxCounter"></div>
+      <button class="img-lightbox__download" onclick="event.stopPropagation();downloadImage(productImages[lightboxIndex], lightboxIndex)"><i class="fas fa-download"></i> Descargar</button>
+    </div>
+  </div>
+
+  <div id="adminToast" class="admin-toast" style="display:none;"></div>
+
+  <script src="../js/products.js?v=20260505"></script>
+  <script src="../js/auth.js?v=20260505"></script>
+  <script src="../js/product-manager.js?v=20260505"></script>
+  <script src="js/admin2.js"></script>
+</body>
+</html>

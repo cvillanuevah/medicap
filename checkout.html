@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout | Soberana</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="stylesheet" href="css/styles.css?v=20260505c">
+</head>
+<body>
+
+  <!-- Minimal Header for Checkout -->
+  <header class="checkout-header">
+    <a href="index.html" class="logo"><span class="logo-text">Soberana</span></a>
+    <div class="checkout-steps" id="checkoutSteps">
+      <span class="step active" data-step="1">Información</span>
+      <span class="step-divider"><i class="fa-solid fa-chevron-right"></i></span>
+      <span class="step" data-step="2">Envío</span>
+      <span class="step-divider"><i class="fa-solid fa-chevron-right"></i></span>
+      <span class="step" data-step="3">Pago</span>
+    </div>
+  </header>
+
+  <main class="checkout-main">
+    <!-- Left: Forms -->
+    <div class="checkout-forms">
+
+      <!-- Step 1: Information -->
+      <div class="checkout-step-panel" id="step1" style="display:block;">
+        <h2>Información de contacto</h2>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="newsletter" checked>
+          <label for="newsletter">Recibir novedades y ofertas por email</label>
+        </div>
+
+        <h2 style="margin-top:35px;">Dirección de envío</h2>
+        <div class="form-row">
+          <div class="form-group"><input type="text" id="firstName" placeholder="Nombre" required></div>
+          <div class="form-group"><input type="text" id="lastName" placeholder="Apellido" required></div>
+        </div>
+        <div class="form-group"><input type="text" id="address" placeholder="Dirección" required></div>
+        <div class="form-group"><input type="text" id="apt" placeholder="Departamento, oficina, etc. (opcional)"></div>
+        <div class="form-row">
+          <div class="form-group"><input type="text" id="city" placeholder="Ciudad" required></div>
+          <div class="form-group">
+            <select id="region" required>
+              <option value="">Región</option>
+              <option value="RM">Región Metropolitana</option>
+              <option value="I">Tarapacá</option>
+              <option value="II">Antofagasta</option>
+              <option value="III">Atacama</option>
+              <option value="IV">Coquimbo</option>
+              <option value="V">Valparaíso</option>
+              <option value="VI">O'Higgins</option>
+              <option value="VII">Maule</option>
+              <option value="VIII">Biobío</option>
+              <option value="IX">Araucanía</option>
+              <option value="X">Los Lagos</option>
+              <option value="XI">Aysén</option>
+              <option value="XII">Magallanes</option>
+              <option value="XIV">Los Ríos</option>
+              <option value="XV">Arica y Parinacota</option>
+              <option value="XVI">Ñuble</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group"><input type="text" id="phone" placeholder="Teléfono" required></div>
+
+        <div class="checkout-nav">
+          <a href="coleccion.html?cat=all" class="checkout-back">&larr; Volver a la tienda</a>
+          <button class="checkout-next-btn" id="toStep2">Continuar al envío</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Shipping -->
+      <div class="checkout-step-panel" id="step2" style="display:none;">
+        <div class="checkout-summary-box" id="shippingSummary"></div>
+
+        <h2>Método de envío</h2>
+        <div class="shipping-options">
+          <label class="shipping-option selected">
+            <input type="radio" name="shipping" value="standard" checked>
+            <div class="shipping-option-info">
+              <span class="shipping-option-name">Envío estándar</span>
+              <span class="shipping-option-detail">1-4 días hábiles</span>
+            </div>
+            <span class="shipping-option-price" id="shippingPrice">$3.990</span>
+          </label>
+          <label class="shipping-option">
+            <input type="radio" name="shipping" value="express">
+            <div class="shipping-option-info">
+              <span class="shipping-option-name">Envío express</span>
+              <span class="shipping-option-detail">Mismo día / 1 hora (RM)</span>
+            </div>
+            <span class="shipping-option-price">$5.990</span>
+          </label>
+        </div>
+
+        <div class="checkout-nav">
+          <button class="checkout-back" id="backToStep1">&larr; Volver a información</button>
+          <button class="checkout-next-btn" id="toStep3">Continuar al pago</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Payment -->
+      <div class="checkout-step-panel" id="step3" style="display:none;">
+        <div class="checkout-summary-box" id="paymentSummary"></div>
+
+        <h2>Método de pago</h2>
+        <div class="payment-methods-checkout">
+          <label class="payment-option selected">
+            <input type="radio" name="payment" value="card" checked>
+            <span>Tarjeta de crédito / débito</span>
+            <div class="payment-icons">
+              <i class="fa-brands fa-cc-visa"></i>
+              <i class="fa-brands fa-cc-mastercard"></i>
+              <i class="fa-brands fa-cc-amex"></i>
+            </div>
+          </label>
+          <label class="payment-option">
+            <input type="radio" name="payment" value="transfer">
+            <span>Transferencia bancaria</span>
+          </label>
+        </div>
+
+        <div class="card-form" id="cardForm">
+          <div class="form-group"><input type="text" id="cardNumber" placeholder="Número de tarjeta" maxlength="19"></div>
+          <div class="form-group"><input type="text" id="cardName" placeholder="Nombre en la tarjeta"></div>
+          <div class="form-row">
+            <div class="form-group"><input type="text" id="cardExpiry" placeholder="MM / AA" maxlength="7"></div>
+            <div class="form-group"><input type="text" id="cardCvv" placeholder="CVV" maxlength="4"></div>
+          </div>
+        </div>
+
+        <div class="transfer-info" id="transferInfo" style="display:none;">
+          <div class="transfer-box">
+            <p><strong>Datos para transferencia:</strong></p>
+            <p>Banco: Banco Estado<br>Tipo: Cuenta corriente<br>Número: 12345678<br>RUT: 76.XXX.XXX-X<br>Nombre: Soberana SpA<br>Email: joyas@soberana.cl</p>
+            <p style="margin-top:10px;font-size:0.8rem;color:#999;">Envía tu comprobante a joyas@soberana.cl</p>
+          </div>
+        </div>
+
+        <div class="checkout-nav">
+          <button class="checkout-back" id="backToStep2">&larr; Volver al envío</button>
+          <button class="checkout-next-btn checkout-pay-btn" id="payBtn">Pagar ahora</button>
+        </div>
+      </div>
+
+      <!-- Confirmation -->
+      <div class="checkout-step-panel" id="stepConfirm" style="display:none;">
+        <div class="order-confirmed">
+          <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          <h2>¡Pedido confirmado!</h2>
+          <p class="order-number">Orden #<span id="orderNumber"></span></p>
+          <p>Recibirás un email de confirmación a <strong id="confirmEmail"></strong></p>
+          <div class="order-confirmed-details" id="confirmedItems"></div>
+          <a href="index.html" class="checkout-next-btn" style="display:inline-block;text-align:center;margin-top:30px;">Volver a la tienda</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Order Summary -->
+    <aside class="checkout-sidebar" id="checkoutSidebar">
+      <h3>Resumen del pedido</h3>
+      <div class="checkout-items" id="checkoutItems"></div>
+      <div class="checkout-totals">
+        <div class="checkout-total-row">
+          <span>Subtotal</span>
+          <span id="checkSubtotal">$0</span>
+        </div>
+        <div class="checkout-total-row">
+          <span>Envío</span>
+          <span id="checkShipping">Calculado en siguiente paso</span>
+        </div>
+        <div class="checkout-total-row total-final">
+          <span>Total</span>
+          <span id="checkTotal">$0</span>
+        </div>
+      </div>
+    </aside>
+  </main>
+
+  <!-- Mobile order summary toggle -->
+  <div class="mobile-order-toggle" id="mobileOrderToggle">
+    <button id="toggleOrderSummary">
+      <i class="fa-solid fa-bag-shopping"></i>
+      <span>Mostrar resumen</span>
+      <span class="mobile-total" id="mobileTotal">$0</span>
+    </button>
+  </div>
+
+  <script src="js/products.js"></script>
+  <script src="js/product-manager.js"></script>
+  <script src="js/cart.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sync settings to checkout
+    (function() {
+      var s;
+      try { s = JSON.parse(localStorage.getItem('soberana_settings')); } catch(e) {}
+      if (!s) return;
+      var nameChanged = s.name && s.name !== 'Soberana';
+      document.querySelectorAll('.transfer-box p, .logo-text').forEach(function(el) {
+        var html = el.innerHTML;
+        var changed = false;
+        if (s.email && html.indexOf('joyas@soberana.cl') !== -1) {
+          html = html.split('joyas@soberana.cl').join(s.email);
+          changed = true;
+        }
+        if (nameChanged && html.indexOf('Soberana') !== -1) {
+          html = html.split('Soberana').join(s.name);
+          changed = true;
+        }
+        if (changed) el.innerHTML = html;
+      });
+      if (nameChanged) {
+        document.title = document.title.replace('Soberana', s.name);
+      }
+    })();
+
+    var items = Cart.getItems();
+    if (items.length === 0) {
+      window.location.href = 'coleccion.html?cat=all';
+      return;
+    }
+
+    var shippingCost = 3990;
+    var currentStep = 1;
+
+    function renderSidebar() {
+      var container = document.getElementById('checkoutItems');
+      var html = '';
+      var allProds = (typeof ProductManager !== 'undefined') ? ProductManager.getAll() : PRODUCTS;
+      items.forEach(function(item) {
+        var p = allProds.find(function(pr) { return pr.id === item.id; });
+        if (!p) return;
+        var matLabel = item.material === 'Gold' ? 'Oro 18K' : (item.material === 'Silver' ? 'Plata' : '');
+        var dispPrice = (p.salePrice && p.salePrice < p.price) ? p.salePrice : p.price;
+        html +=
+          '<div class="checkout-item">' +
+            '<div class="checkout-item-img">' +
+              '<img src="' + p.images[0] + '" alt="' + p.name + '">' +
+              '<span class="checkout-item-qty">' + item.qty + '</span>' +
+            '</div>' +
+            '<div class="checkout-item-details">' +
+              '<p class="checkout-item-name">' + p.name + '</p>' +
+              (matLabel ? '<p class="checkout-item-variant">' + matLabel + '</p>' : '') +
+            '</div>' +
+            '<p class="checkout-item-price">' + Cart.formatPrice(dispPrice * item.qty) + '</p>' +
+          '</div>';
+      });
+      container.innerHTML = html;
+      updateTotals();
+    }
+
+    function updateTotals() {
+      var subtotal = Cart.getSubtotal();
+      var free = subtotal >= 80000;
+      var ship = currentStep >= 2 ? (free ? 0 : shippingCost) : 0;
+      var total = subtotal + ship;
+      document.getElementById('checkSubtotal').textContent = Cart.formatPrice(subtotal);
+      document.getElementById('checkShipping').textContent = currentStep >= 2 ? (free ? 'Gratis' : Cart.formatPrice(ship)) : 'Calculado en siguiente paso';
+      document.getElementById('checkTotal').textContent = Cart.formatPrice(currentStep >= 2 ? total : subtotal);
+      document.getElementById('mobileTotal').textContent = Cart.formatPrice(currentStep >= 2 ? total : subtotal);
+
+      if (document.getElementById('shippingPrice')) {
+        document.getElementById('shippingPrice').textContent = free ? 'Gratis' : '$3.990';
+      }
+    }
+
+    function goToStep(n) {
+      currentStep = n;
+      for (var i = 1; i <= 3; i++) {
+        document.getElementById('step' + i).style.display = i === n ? 'block' : 'none';
+      }
+      document.getElementById('stepConfirm').style.display = 'none';
+      document.querySelectorAll('.checkout-steps .step').forEach(function(s) {
+        var sn = parseInt(s.dataset.step);
+        s.classList.toggle('active', sn === n);
+        s.classList.toggle('done', sn < n);
+      });
+      updateTotals();
+      window.scrollTo(0, 0);
+    }
+
+    function buildSummaryBox(containerId) {
+      var el = document.getElementById(containerId);
+      var e = document.getElementById('email').value;
+      var addr = document.getElementById('address').value + ', ' + document.getElementById('city').value;
+      var region = document.getElementById('region');
+      var regionText = region.options[region.selectedIndex] ? region.options[region.selectedIndex].text : '';
+      el.innerHTML =
+        '<div class="summary-row"><span class="summary-label">Contacto</span><span>' + e + '</span><button class="summary-change" data-goto="1">Cambiar</button></div>' +
+        '<div class="summary-row"><span class="summary-label">Enviar a</span><span>' + addr + ', ' + regionText + '</span><button class="summary-change" data-goto="1">Cambiar</button></div>';
+      el.querySelectorAll('.summary-change').forEach(function(btn) {
+        btn.addEventListener('click', function() { goToStep(parseInt(this.dataset.goto)); });
+      });
+    }
+
+    // Validate step 1
+    function validateStep1() {
+      var fields = ['email', 'firstName', 'lastName', 'address', 'city', 'phone'];
+      var valid = true;
+      fields.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (!el.value.trim()) {
+          el.classList.add('input-error');
+          valid = false;
+        } else {
+          el.classList.remove('input-error');
+        }
+      });
+      var region = document.getElementById('region');
+      if (!region.value) { region.classList.add('input-error'); valid = false; }
+      else { region.classList.remove('input-error'); }
+      return valid;
+    }
+
+    // Step navigation
+    document.getElementById('toStep2').addEventListener('click', function() {
+      if (!validateStep1()) return;
+      buildSummaryBox('shippingSummary');
+      goToStep(2);
+    });
+
+    document.getElementById('backToStep1').addEventListener('click', function() { goToStep(1); });
+
+    document.getElementById('toStep3').addEventListener('click', function() {
+      shippingCost = document.querySelector('input[name="shipping"]:checked').value === 'express' ? 5990 : 3990;
+      buildSummaryBox('paymentSummary');
+      var shipRow = document.getElementById('paymentSummary');
+      var shipText = document.querySelector('input[name="shipping"]:checked').value === 'express' ? 'Express (mismo día)' : 'Estándar (1-4 días)';
+      var subtotal = Cart.getSubtotal();
+      var free = subtotal >= 80000;
+      shipRow.innerHTML +=
+        '<div class="summary-row"><span class="summary-label">Envío</span><span>' + shipText + ' — ' + (free ? 'Gratis' : Cart.formatPrice(shippingCost)) + '</span><button class="summary-change" data-goto="2">Cambiar</button></div>';
+      shipRow.querySelectorAll('.summary-change').forEach(function(btn) {
+        btn.addEventListener('click', function() { goToStep(parseInt(this.dataset.goto)); });
+      });
+      goToStep(3);
+    });
+
+    document.getElementById('backToStep2').addEventListener('click', function() { goToStep(2); });
+
+    // Shipping options selection highlight
+    document.querySelectorAll('.shipping-option input').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        document.querySelectorAll('.shipping-option').forEach(function(o) { o.classList.remove('selected'); });
+        this.closest('.shipping-option').classList.add('selected');
+        shippingCost = this.value === 'express' ? 5990 : 3990;
+        updateTotals();
+      });
+    });
+
+    // Payment options
+    document.querySelectorAll('.payment-option input').forEach(function(radio) {
+      radio.addEventListener('change', function() {
+        document.querySelectorAll('.payment-option').forEach(function(o) { o.classList.remove('selected'); });
+        this.closest('.payment-option').classList.add('selected');
+        document.getElementById('cardForm').style.display = this.value === 'card' ? 'block' : 'none';
+        document.getElementById('transferInfo').style.display = this.value === 'transfer' ? 'block' : 'none';
+      });
+    });
+
+    // Card number formatting
+    document.getElementById('cardNumber').addEventListener('input', function() {
+      var v = this.value.replace(/\D/g, '').substring(0, 16);
+      this.value = v.replace(/(.{4})/g, '$1 ').trim();
+    });
+
+    document.getElementById('cardExpiry').addEventListener('input', function() {
+      var v = this.value.replace(/\D/g, '').substring(0, 4);
+      if (v.length >= 3) v = v.substring(0, 2) + ' / ' + v.substring(2);
+      this.value = v;
+    });
+
+    // Pay button
+    document.getElementById('payBtn').addEventListener('click', function() {
+      var btn = this;
+      btn.disabled = true;
+      btn.innerHTML = '<span class="btn-spinner"></span> Procesando...';
+
+      setTimeout(function() {
+        var orderNum = 'SOB-' + Math.floor(10000 + Math.random() * 90000);
+        document.getElementById('orderNumber').textContent = orderNum;
+        document.getElementById('confirmEmail').textContent = document.getElementById('email').value;
+
+        // Build confirmed items list
+        var cHtml = '';
+        var allProds2 = (typeof ProductManager !== 'undefined') ? ProductManager.getAll() : PRODUCTS;
+        items.forEach(function(item) {
+          var p = allProds2.find(function(pr) { return pr.id === item.id; });
+          if (!p) return;
+          var dp = (p.salePrice && p.salePrice < p.price) ? p.salePrice : p.price;
+          cHtml += '<div class="confirmed-item"><span>' + p.name + ' × ' + item.qty + '</span><span>' + Cart.formatPrice(dp * item.qty) + '</span></div>';
+        });
+        var subtotal = Cart.getSubtotal();
+        var free = subtotal >= 80000;
+        var shipCost = free ? 0 : shippingCost;
+        cHtml += '<div class="confirmed-item total"><span>Envío</span><span>' + (free ? 'Gratis' : Cart.formatPrice(shipCost)) + '</span></div>';
+        cHtml += '<div class="confirmed-item total final"><span>Total</span><span>' + Cart.formatPrice(subtotal + shipCost) + '</span></div>';
+        document.getElementById('confirmedItems').innerHTML = cHtml;
+
+        // Hide sidebar, steps, show confirmation
+        document.getElementById('checkoutSidebar').style.display = 'none';
+        document.getElementById('checkoutSteps').style.display = 'none';
+        document.getElementById('mobileOrderToggle').style.display = 'none';
+        for (var i = 1; i <= 3; i++) document.getElementById('step' + i).style.display = 'none';
+        document.getElementById('stepConfirm').style.display = 'block';
+        document.querySelector('.checkout-forms').style.maxWidth = '600px';
+        document.querySelector('.checkout-forms').style.margin = '0 auto';
+
+        if (typeof ProductManager !== 'undefined') {
+          items.forEach(function(item) {
+            var prod = ProductManager.getById(item.id);
+            if (prod && prod.stock !== undefined && prod.stock !== null) {
+              var newStock = Math.max(0, Number(prod.stock) - item.qty);
+              var updateData = { stock: newStock };
+              if (newStock <= 0) updateData.status = 'agotado';
+              updateData._historyEntry = {
+                date: new Date().toISOString(),
+                action: 'updated',
+                changes: ['Stock: ' + prod.stock + ' uds → ' + newStock + ' uds (venta de ' + item.qty + ' ud' + (item.qty !== 1 ? 's' : '') + ')']
+              };
+              ProductManager.update(item.id, updateData);
+            }
+          });
+        }
+
+        Cart.clear();
+      }, 2000);
+    });
+
+    // Mobile toggle
+    document.getElementById('toggleOrderSummary').addEventListener('click', function() {
+      var sidebar = document.getElementById('checkoutSidebar');
+      sidebar.classList.toggle('mobile-visible');
+      var span = this.querySelector('span:nth-child(2)');
+      span.textContent = sidebar.classList.contains('mobile-visible') ? 'Ocultar resumen' : 'Mostrar resumen';
+    });
+
+    // Focus effect on inputs
+    document.querySelectorAll('.checkout-forms input, .checkout-forms select').forEach(function(el) {
+      el.addEventListener('focus', function() { this.classList.remove('input-error'); });
+    });
+
+    renderSidebar();
+  });
+  </script>
+</body>
+</html>
