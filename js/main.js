@@ -16,9 +16,9 @@ document.addEventListener('DOMContentLoaded', function() {
       if (title === 'Contacto') {
         var p = col.querySelector('p');
         if (p) {
-          var email = s.email || 'joyas@soberana.cl';
+          var email = s.email || 'contacto@medicap.cl';
           var phone = s.phone || '+569 48061416';
-          var ig = s.instagram || '@soberana_joyas';
+          var ig = s.instagram || '@medicap_cl';
           p.innerHTML =
             '<i class="fa-regular fa-envelope"></i>&nbsp; ' + email + '<br>' +
             '<i class="fa-brands fa-whatsapp"></i>&nbsp; ' + phone + '<br>' +
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       }
 
-      if (title === 'Soberana' && s.name && s.name !== 'Soberana') {
+      if (title === 'MediCap' && s.name && s.name !== 'MediCap') {
         h4.textContent = s.name;
       }
     });
@@ -56,13 +56,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (footerBottom) {
       var cp = footerBottom.querySelector('p');
       if (cp) {
-        var storeName = s.name || 'Soberana';
+        var storeName = s.name || 'MediCap';
         cp.innerHTML = '&copy; ' + new Date().getFullYear() + ' ' + storeName;
       }
     }
 
     var newName = s.name;
-    var nameChanged = newName && newName !== 'Soberana';
+    var nameChanged = newName && newName !== 'MediCap';
 
     if (nameChanged) {
       document.querySelectorAll('.logo-text').forEach(function(el) {
@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
       });
       var loader = document.querySelector('.loader-text');
       if (loader) loader.textContent = newName;
-      document.title = document.title.replace('Soberana', newName);
+      document.title = document.title.replace('MediCap', newName);
 
       var mobileNavHeader = document.querySelector('.mobile-nav-header span');
-      if (mobileNavHeader && mobileNavHeader.textContent.trim() === 'Soberana') {
+      if (mobileNavHeader && mobileNavHeader.textContent.trim() === 'MediCap') {
         mobileNavHeader.textContent = newName;
       }
     }
@@ -82,12 +82,12 @@ document.addEventListener('DOMContentLoaded', function() {
       if (!el) return;
       var html = el.innerHTML;
       var changed = false;
-      if (nameChanged && html.indexOf('Soberana') !== -1) {
-        html = html.split('Soberana').join(newName);
+      if (nameChanged && html.indexOf('MediCap') !== -1) {
+        html = html.split('MediCap').join(newName);
         changed = true;
       }
-      if (s.email && html.indexOf('joyas@soberana.cl') !== -1) {
-        html = html.split('joyas@soberana.cl').join(s.email);
+      if (s.email && html.indexOf('contacto@medicap.cl') !== -1) {
+        html = html.split('contacto@medicap.cl').join(s.email);
         changed = true;
       }
       if (s.phone && html.indexOf('+569 48061416') !== -1) {

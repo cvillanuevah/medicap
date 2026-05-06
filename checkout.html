@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Checkout | Soberana</title>
+  <title>Checkout | MediCap</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
 
   <!-- Minimal Header for Checkout -->
   <header class="checkout-header">
-    <a href="index.html" class="logo"><span class="logo-text">Soberana</span></a>
+    <a href="index.html" class="logo"><span class="logo-text">MediCap</span></a>
     <div class="checkout-steps" id="checkoutSteps">
       <span class="step active" data-step="1">Información</span>
       <span class="step-divider"><i class="fa-solid fa-chevron-right"></i></span>
@@ -141,8 +141,8 @@
         <div class="transfer-info" id="transferInfo" style="display:none;">
           <div class="transfer-box">
             <p><strong>Datos para transferencia:</strong></p>
-            <p>Banco: Banco Estado<br>Tipo: Cuenta corriente<br>Número: 12345678<br>RUT: 76.XXX.XXX-X<br>Nombre: Soberana SpA<br>Email: joyas@soberana.cl</p>
-            <p style="margin-top:10px;font-size:0.8rem;color:#999;">Envía tu comprobante a joyas@soberana.cl</p>
+            <p>Banco: Banco Estado<br>Tipo: Cuenta corriente<br>N&uacute;mero: 12345678<br>RUT: 76.XXX.XXX-X<br>Nombre: MediCap SpA<br>Email: contacto@medicap.cl</p>
+            <p style="margin-top:10px;font-size:0.8rem;color:#999;">Envía tu comprobante a contacto@medicap.cl</p>
           </div>
         </div>
 
@@ -205,22 +205,22 @@
       var s;
       try { s = JSON.parse(localStorage.getItem('soberana_settings')); } catch(e) {}
       if (!s) return;
-      var nameChanged = s.name && s.name !== 'Soberana';
+      var nameChanged = s.name && s.name !== 'MediCap';
       document.querySelectorAll('.transfer-box p, .logo-text').forEach(function(el) {
         var html = el.innerHTML;
         var changed = false;
-        if (s.email && html.indexOf('joyas@soberana.cl') !== -1) {
-          html = html.split('joyas@soberana.cl').join(s.email);
+        if (s.email && html.indexOf('contacto@medicap.cl') !== -1) {
+          html = html.split('contacto@medicap.cl').join(s.email);
           changed = true;
         }
-        if (nameChanged && html.indexOf('Soberana') !== -1) {
-          html = html.split('Soberana').join(s.name);
+        if (nameChanged && html.indexOf('MediCap') !== -1) {
+          html = html.split('MediCap').join(s.name);
           changed = true;
         }
         if (changed) el.innerHTML = html;
       });
       if (nameChanged) {
-        document.title = document.title.replace('Soberana', s.name);
+        document.title = document.title.replace('MediCap', s.name);
       }
     })();
 
@@ -387,7 +387,7 @@
       btn.innerHTML = '<span class="btn-spinner"></span> Procesando...';
 
       setTimeout(function() {
-        var orderNum = 'SOB-' + Math.floor(10000 + Math.random() * 90000);
+        var orderNum = 'MCP-' + Math.floor(10000 + Math.random() * 90000);
         document.getElementById('orderNumber').textContent = orderNum;
         document.getElementById('confirmEmail').textContent = document.getElementById('email').value;
 

@@ -6,9 +6,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
   var catInfo = CATEGORIES[cat];
   var title = cat === 'all' ? 'Todos los Productos' : (catInfo ? catInfo.name : 'Colección');
-  var bannerImg = catInfo ? catInfo.banner : 'https://soberana.cl/cdn/shop/files/Soberana_Banner-2_5464be49-092d-4596-bc1c-a9ab75395cd9.jpg?v=1689630182&width=1400';
+  var bannerImg = catInfo ? catInfo.banner : 'https://www.drwoofapparel.com/cdn/shop/files/002_Dinosaurs_Front_1600x.jpg?v=1708999209';
 
-  document.title = title + ' | Soberana';
+  document.title = title + ' | MediCap';
   document.getElementById('collectionTitle').textContent = title;
   document.getElementById('breadcrumbCat').textContent = title;
   document.getElementById('collectionBanner').style.backgroundImage = 'url(' + bannerImg + ')';

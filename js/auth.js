@@ -17,9 +17,9 @@ var Auth = (function() {
   function seedDefaults() {
     var users = getUsers();
     var defaults = [
-      { email: 'admin@soberana.cl', password: 'admin123', firstName: 'Administrador', lastName: 'Soberana', phone: '+569 48061416', address: '', city: 'Santiago', region: 'RM', role: 'admin' },
-      { email: 'maria@soberana.cl', password: 'maria123', firstName: 'María', lastName: 'González', phone: '+569 12345678', address: 'Av. Providencia 1234', city: 'Santiago', region: 'RM', role: 'customer' },
-      { email: 'carla@soberana.cl', password: 'carla123', firstName: 'Carla', lastName: 'Muñoz', phone: '+569 87654321', address: 'Los Leones 567', city: 'Santiago', region: 'RM', role: 'customer' },
+      { email: 'admin@medicap.cl', password: 'admin123', firstName: 'Administrador', lastName: 'MediCap', phone: '+569 48061416', address: '', city: 'Santiago', region: 'RM', role: 'admin' },
+      { email: 'maria@medicap.cl', password: 'maria123', firstName: 'Mar&iacute;a', lastName: 'Gonz&aacute;lez', phone: '+569 12345678', address: 'Av. Providencia 1234', city: 'Santiago', region: 'RM', role: 'customer' },
+      { email: 'carla@medicap.cl', password: 'carla123', firstName: 'Carla', lastName: 'Mu&ntilde;oz', phone: '+569 87654321', address: 'Los Leones 567', city: 'Santiago', region: 'RM', role: 'customer' },
       { email: 'test@test.com', password: 'test123', firstName: 'Cliente', lastName: 'Test', phone: '+569 11111111', address: 'Calle Test 100', city: 'Valparaíso', region: 'V', role: 'customer' }
     ];
     defaults.forEach(function(d) {

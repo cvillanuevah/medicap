@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var catInfo = CATEGORIES[product.category] || {name: product.category, slug: product.category};
 
   // Page title
-  document.title = product.name + ' | Soberana';
+  document.title = product.name + ' | MediCap';
 
   // Breadcrumb
   document.getElementById('prodCatLink').textContent = catInfo.name;

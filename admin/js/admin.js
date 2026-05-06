@@ -2360,14 +2360,14 @@ document.addEventListener('keydown', function(e) {
 // --- Settings ---
 var SETTINGS_KEY = 'soberana_settings';
 var SETTINGS_DEFAULTS = {
-  name: 'Soberana',
-  slogan: '',
-  description: '',
-  email: 'joyas@soberana.cl',
+  name: 'MediCap',
+  slogan: 'Gorros quir&uacute;rgicos con estilo',
+  description: 'Gorros quir&uacute;rgicos para profesionales de la salud',
+  email: 'contacto@medicap.cl',
   phone: '+569 48061416',
   address: 'Santiago, Chile',
-  instagram: '@soberana_joyas',
-  facebook: 'facebook.com/soberanajoyas',
+  instagram: '@medicap_cl',
+  facebook: 'facebook.com/medicap.cl',
   tiktok: '',
   whatsapp: '',
   shipCost: 3990,
@@ -2456,8 +2456,8 @@ function saveSettings() {
   };
   localStorage.setItem(SETTINGS_KEY, JSON.stringify(s));
   var logo = document.querySelector('.admin-sidebar__logo');
-  if (logo) logo.textContent = s.name || 'Soberana';
-  document.title = 'Panel Admin | ' + (s.name || 'Soberana');
+  if (logo) logo.textContent = s.name || 'MediCap';
+  document.title = 'Panel Admin | ' + (s.name || 'MediCap');
   logActivity('settings', 'actualizó la configuración de la tienda');
   showToast('Configuración guardada correctamente');
 }
