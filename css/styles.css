@@ -1910,6 +1910,10 @@ button {
     padding: 12px 20px;
   }
 
+  .header-icons {
+    gap: 12px;
+  }
+
   .main-nav {
     display: none;
   }
@@ -1991,6 +1995,21 @@ button {
 }
 
 @media (max-width: 480px) {
+  .header-inner {
+    padding: 10px 15px;
+  }
+
+  .header-icons {
+    gap: 8px;
+  }
+
+  .header-icons a,
+  .header-icons button {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+
   .hero-overlay h1 {
     font-size: 1.4rem;
     letter-spacing: 3px;
