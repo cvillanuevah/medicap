@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Sync admin settings to store
   (function syncSettings() {
-    var SETTINGS_KEY = 'soberana_settings';
+    var SETTINGS_KEY = 'medicap_settings';
     var s;
     try { s = JSON.parse(localStorage.getItem(SETTINGS_KEY)); } catch(e) {}
     if (!s) return;

@@ -203,7 +203,7 @@
     // Sync settings to checkout
     (function() {
       var s;
-      try { s = JSON.parse(localStorage.getItem('soberana_settings')); } catch(e) {}
+      try { s = JSON.parse(localStorage.getItem('medicap_settings')); } catch(e) {}
       if (!s) return;
       var nameChanged = s.name && s.name !== 'MediCap';
       document.querySelectorAll('.transfer-box p, .logo-text').forEach(function(el) {

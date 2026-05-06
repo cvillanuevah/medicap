@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Sync store name from settings
   (function() {
     var s;
-    try { s = JSON.parse(localStorage.getItem('soberana_settings')); } catch(e) {}
+    try { s = JSON.parse(localStorage.getItem('medicap_settings')); } catch(e) {}
     if (s && s.name) {
       var logo = document.querySelector('.admin-sidebar__logo');
       if (logo) logo.textContent = s.name;
@@ -96,7 +96,7 @@ function initLogout() {
   var btn = document.getElementById('adminLogout');
   if (btn) btn.addEventListener('click', function(e) {
     e.preventDefault();
-    localStorage.removeItem('soberana_session');
+    localStorage.removeItem('medicap_session');
     window.location.href = 'login.html';
   });
 }
@@ -164,7 +164,7 @@ function showToast(msg, type) {
 }
 
 // --- Activity Log ---
-var ACTIVITY_KEY = 'soberana_activity_log';
+var ACTIVITY_KEY = 'medicap_activity_log';
 
 function getActivityLog() {
   try { return JSON.parse(localStorage.getItem(ACTIVITY_KEY)) || []; }
@@ -2358,7 +2358,7 @@ document.addEventListener('keydown', function(e) {
 });
 
 // --- Settings ---
-var SETTINGS_KEY = 'soberana_settings';
+var SETTINGS_KEY = 'medicap_settings';
 var SETTINGS_DEFAULTS = {
   name: 'MediCap',
   slogan: 'Gorros quir&uacute;rgicos con estilo',

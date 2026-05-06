@@ -38,7 +38,7 @@
       // 1. Session check
       var session = null;
       try {
-        session = JSON.parse(localStorage.getItem('soberana_session'));
+        session = JSON.parse(localStorage.getItem('medicap_session'));
       } catch(e) {}
 
       if (!session) {
@@ -53,7 +53,7 @@
       // 2. Users check
       var users = [];
       try {
-        users = JSON.parse(localStorage.getItem('soberana_users')) || [];
+        users = JSON.parse(localStorage.getItem('medicap_users')) || [];
       } catch(e) {}
 
       var adminUser = users.find(function(u) { return u.role === 'admin'; });
@@ -100,19 +100,19 @@
     }
 
     function clearAndReload() {
-      localStorage.removeItem('soberana_session');
-      localStorage.removeItem('soberana_users');
+      localStorage.removeItem('medicap_session');
+      localStorage.removeItem('medicap_users');
       location.reload();
     }
 
     function loginAsAdmin() {
       // Clear first
-      localStorage.removeItem('soberana_session');
-      localStorage.removeItem('soberana_users');
+      localStorage.removeItem('medicap_session');
+      localStorage.removeItem('medicap_users');
       // Re-seed
       Auth.updateAuthUI();
       // Login
-      var result = Auth.login('admin@soberana.cl', 'admin123');
+      var result = Auth.login('admin@medicap.cl', 'admin123');
       if (result.ok) {
         alert('Login exitoso como Admin. Ahora navega a cuenta.html o index.html para ver el botón.');
         diagnose();

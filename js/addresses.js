@@ -1,5 +1,5 @@
 var Addresses = (function() {
-  var STORAGE_KEY = 'soberana_addresses';
+  var STORAGE_KEY = 'medicap_addresses';
 
   function getKey() {
     var session = Auth.getSession();

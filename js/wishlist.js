@@ -1,5 +1,5 @@
 var Wishlist = (function() {
-  var STORAGE_KEY = 'soberana_wishlist';
+  var STORAGE_KEY = 'medicap_wishlist';
 
   function getKey() {
     var session = Auth.getSession();

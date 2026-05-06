@@ -1,5 +1,5 @@
 var Cart = (function() {
-  var STORAGE_KEY = 'soberana_cart';
+  var STORAGE_KEY = 'medicap_cart';
 
   function getItems() {
     try {

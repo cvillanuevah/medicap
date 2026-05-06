@@ -1,6 +1,6 @@
 var ProductManager = (function() {
-  var OVERRIDES_KEY = 'soberana_product_overrides';
-  var CUSTOM_KEY = 'soberana_custom_products';
+  var OVERRIDES_KEY = 'medicap_product_overrides';
+  var CUSTOM_KEY = 'medicap_custom_products';
 
   function getOverrides() {
     try { return JSON.parse(localStorage.getItem(OVERRIDES_KEY)) || {}; }

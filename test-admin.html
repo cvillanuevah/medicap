@@ -44,8 +44,8 @@
     log('3. Es admin: ' + isAdmin, isAdmin);
 
     // Test 4: localStorage
-    var raw = localStorage.getItem('soberana_session');
-    log('4. localStorage soberana_session: <pre>' + raw + '</pre>', !!raw);
+    var raw = localStorage.getItem('medicap_session');
+    log('4. localStorage medicap_session: <pre>' + raw + '</pre>', !!raw);
 
     // Test 5: Users
     var users = Auth.getAllUsers();
@@ -56,7 +56,7 @@
     log('6. document.readyState: ' + document.readyState, true);
 
     function loginAdmin() {
-      var result = Auth.login('admin@soberana.cl', 'admin123');
+      var result = Auth.login('admin@medicap.cl', 'admin123');
       log('Login result: ' + JSON.stringify(result), result.ok);
       if (result.ok) {
         log('Session despues de login: ' + JSON.stringify(Auth.getSession()), true);
@@ -66,7 +66,7 @@
     }
 
     function logoutUser() {
-      localStorage.removeItem('soberana_session');
+      localStorage.removeItem('medicap_session');
       location.reload();
     }
   </script>
