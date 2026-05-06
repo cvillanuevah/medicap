@@ -310,7 +310,7 @@ body {
 /* === TABLES === */
 .admin-table-controls { margin-bottom: 14px; }
 .admin-table-controls .admin-input { max-width: 300px; }
-.admin-table-wrapper { overflow: visible; }
+.admin-table-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 
 .admin-table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
 .admin-table th {
@@ -1076,6 +1076,17 @@ body {
 
 @media (max-width: 480px) {
   .admin-stats { grid-template-columns: 1fr; }
+  .admin-content { padding: 12px; }
+  .admin-topbar { padding: 10px 12px; }
+  .admin-topbar h2 { font-size: 1rem; }
+  .admin-card { padding: 16px; }
+  .admin-table { font-size: 0.8rem; }
+  .admin-table th,
+  .admin-table td { padding: 8px 10px; }
+  .admin-modal__body { padding: 16px; }
+  .prod-editor-body { grid-template-columns: 1fr; }
+  .prod-editor-left { border-right: none; border-bottom: 1px solid var(--adm-border); max-height: none; }
+  .prod-editor-right { max-height: none; }
 }
 
 /* === ENHANCED PRODUCT EDITOR === */
